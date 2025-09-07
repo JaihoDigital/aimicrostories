@@ -56,6 +56,6 @@ We welcome contributions! Here's how you can help:
 
 ## 🌍 Social Media  
 - 📸 Instagram: [@aimicrostories](https://instagram.com/aimicrostories)  
-- ▶️ YouTube: Coming Soon 
+- ▶️ YouTube: [@aimicrostories](https://www.youtube.com/@aimicrostories)
 - 📘 Facebook Page: [AI Micro Stories](https://www.facebook.com/people/aimicrostories/61580500825522/)
-- 🧵 Thread: [@aimicrostories](https://www.threads.com/@aimicrostories)
+- 🧵 Threads: [@aimicrostories](https://www.threads.com/@aimicrostories)
