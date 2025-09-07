@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore More - AI Micro Stories</title>
+    <meta name="description" content="Explore our collection of 8-second AI-generated micro-stories by genre, search, and discover new tiny worlds.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimicrostories.com/explore">
+    <meta property="og:title" content="Explore More - AI Micro Stories">
+    <meta property="og:description" content="Explore our collection of 8-second AI-generated micro-stories by genre, search, and discover new tiny worlds.">
+    <meta property="og:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aimicrostories.com/explore">
+    <meta property="twitter:title" content="Explore More - AI Micro Stories">
+    <meta property="twitter:description" content="Explore our collection of 8-second AI-generated micro-stories by genre, search, and discover new tiny worlds.">
+    <meta property="twitter:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Color Variables */
+            --cosmic-dark: #0F1724;
+            --soft-cream: #F9F7F3;
+            --neon-teal: #00E5B5;
+            --warm-coral: #FF6B5F;
+            --violet: #6C5CE7;
+            --dark-blue: #1E2A3A;
+            --light-gray: #E2E8F0;
+            --medium-gray: #718096;
+            
+            /* Theme Variables (Dark by default) */
+            --bg-primary: var(--cosmic-dark);
+            --bg-secondary: var(--dark-blue);
+            --text-primary: var(--soft-cream);
+            --text-secondary: #CBD5E0;
+            --accent: var(--neon-teal);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(30, 42, 58, 0.7);
+            --nav-bg: rgba(15, 23, 36, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--soft-cream);
+            --bg-secondary: #ffffff;
+            --text-primary: var(--cosmic-dark);
+            --text-secondary: #4A5568;
+            --accent: var(--violet);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(249, 247, 243, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark theme adjustment for accent color */
+        [data-theme="dark"] {
+            --accent: #26c6a7;
+            --accent-hover: #1da58a;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            position: absolute;
+            transform: translateY(40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-moon {
+            transform: translateY(-40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-sun {
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, var(--dark-blue) 100%);
+        }
+
+        [data-theme="light"] .hero {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, #e6f3ff 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Search and Filter Section */
+        .search-filter {
+            padding: 3rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border-radius: 50px;
+            border: 1px solid var(--medium-gray);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(38, 198, 167, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid var(--medium-gray);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .genre-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .genre-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .genre-tag:hover,
+        .genre-tag.active {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            box-shadow: var(--card-shadow);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        /* Sound Button Styling */
+        .sound-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .sound-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .sound-btn.muted {
+            background: rgba(255, 107, 95, 0.8);
+        }
+
+        .sound-btn.muted:hover {
+            background: rgba(255, 107, 95, 1);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .video-genre {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .load-more-btn {
+            background: #26c6a7;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(38, 198, 167, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cosmic-dark);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] footer {
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .social-section h3, .subscribe-section h3 {
+            color: var(--soft-cream);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 36, 0.8);
+            color: var(--soft-cream);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="light"] footer .social-link:hover {
+            background: var(--violet);
+            color: var(--soft-cream);
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-input {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--dark-blue);
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-btn {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(38, 198, 167, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--soft-cream);
+        }
+
+        /* Results info */
+        .results-info {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--text-secondary);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Media Queries */
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">AI Micro Stories</a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#stories">Stories</a></li>
+                    <li><a href="explore_more.html" class="active">Portfolio</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                
+                <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explore Our Universe</h1>
+                <p>Discover hundreds of 8-second AI micro-stories across multiple genres and themes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="search-filter">
+        <div class="container">
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search stories by title, description, or theme..." id="searchInput">
+            </div>
+            
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="sortSelect">Sort by:</label>
+                    <select class="filter-select" id="sortSelect">
+                        <option value="latest">Latest</option>
+                        <option value="popular">Most Popular</option>
+                        <option value="az">A-Z</option>
+                        <option value="za">Z-A</option>
+                        <option value="genre">Genre</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="dateFilter">Date:</label>
+                    <select class="filter-select" id="dateFilter">
+                        <option value="all">All Time</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="genre-tags">
+                <div class="genre-tag active" data-genre="all">All Genres</div>
+                <div class="genre-tag" data-genre="sci-fi">Sci-Fi</div>
+                <div class="genre-tag" data-genre="fantasy">Fantasy</div>
+                <div class="genre-tag" data-genre="cyberpunk">Cyberpunk</div>
+                <div class="genre-tag" data-genre="adventure">Adventure</div>
+                <div class="genre-tag" data-genre="mystery">Mystery</div>
+                <div class="genre-tag" data-genre="horror">Horror</div>
+                <div class="genre-tag" data-genre="romance">Romance</div>
+                <div class="genre-tag" data-genre="comedy">Comedy</div>
+                <div class="genre-tag" data-genre="ASMR">ASMR</div>
+                <div class="genre-tag" data-genre="cosmic">Cosmic</div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="results-info">
+                <p id="resultsCount">Showing all 24 stories</p>
+            </div>
+            
+            <div class="video-grid" id="videoGrid">
+                <!-- Video cards will be populated by JavaScript -->
+            </div>
+            
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No stories found</h3>
+                <p>Try adjusting your search terms or filters</p>
+            </div>
+            
+            <div class="load-more">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Stories</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="subscribe-section">
+                    <h3>Subscribe for Daily Stories</h3>
+                    <form class="subscribe-form">
+                        <input type="email" class="form-input" placeholder="Your email address" aria-label="Your email address" required>
+                        <button type="submit" class="form-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 AI Micro Stories • Powered by Jaiho Labs</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample video data
+        const videoData = [
+            {
+                id: 1,
+                title: "The Last Starlight",
+                description: "A lone astronaut discovers the last source of light in a dying universe.",
+                genre: "sci-fi",
+                date: "2025-05-15",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1250
+            },
+            {
+                id: 2,
+                title: "Neon Dreams",
+                description: "A cyberpunk detective searches for memories in a digital dreamscape.",
+                genre: "cyberpunk",
+                date: "2025-05-14",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 890
+            },
+            {
+                id: 3,
+                title: "Mystical Door Opens",
+                description: "A figure steps through a glowing door into a starry portal, vanishing before it closes.",
+                genre: "fantasy",
+                date: "2025-09-6",
+                thumbnail: "assets/videos/Mystical_Door_Opens_to_Cosmos.mp4",
+                views: 2100
+            },
+            {
+                id: 4,
+                title: "Desert Mirage",
+                description: "A wanderer in the desert finds an oasis that only appears at midnight.",
+                genre: "adventure",
+                date: "2025-05-12",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 756
+            },
+            {
+                id: 5,
+                title: "Time Weavers",
+                description: "A secret society manipulates time threads to prevent temporal catastrophes.",
+                genre: "sci-fi",
+                date: "2025-05-11",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1876
+            },
+            {
+                id: 6,
+                title: "Lonely Man in train",
+                description: "An anime character sees their glowing, smiling reflection in a rain-streaked train window at night.",
+                genre: "fantasy",
+                date: "2025-09-11",
+                thumbnail: "assets/videos/A_lonely_animestyle.mp4",
+                views: 1432
+            },
+            {
+                id: 7,
+                title: "Digital Shadows",
+                description: "A hacker discovers their reflection has gained consciousness in cyberspace.",
+                genre: "cyberpunk",
+                date: "2025-05-09",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 967
+            },
+            {
+                id: 8,
+                title: "The Singing Mountain",
+                description: "A mountain's ancient song holds the key to awakening dormant magic.",
+                genre: "fantasy",
+                date: "2025-05-08",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1654
+            },
+            {
+                id: 9,
+                title: "Quantum Café",
+                description: "A coffee shop exists in multiple dimensions simultaneously.",
+                genre: "sci-fi",
+                date: "2025-05-07",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 2234
+            },
+            {
+                id: 10,
+                title: "The Midnight Library",
+                description: "A librarian discovers books that write themselves at midnight.",
+                genre: "mystery",
+                date: "2025-05-06",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1123
+            },
+            {
+                id: 11,
+                title: "Clockwork Heart",
+                description: "A mechanical engineer falls in love with their own creation.",
+                genre: "romance",
+                date: "2025-05-05",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1887
+            },
+            {
+                id: 12,
+                title: "The Laughing Moon",
+                description: "Every full moon, the moon tells jokes to earthbound creatures.",
+                genre: "comedy",
+                date: "2025-05-04",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 2756
+            },
+            {
+                id: 13,
+                title: "Shadow's Edge",
+                description: "A photographer captures shadows that don't belong to anyone.",
+                genre: "horror",
+                date: "2025-05-03",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1456
+            },
+            {
+                id: 14,
+                title: "Sky Pirates",
+                description: "Airship pirates discover a floating island full of treasures.",
+                genre: "adventure",
+                date: "2025-05-02",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1998
+            },
+            {
+                id: 15,
+                title: "The Memory Merchant",
+                description: "A street vendor sells bottled memories from different lifetimes.",
+                genre: "sci-fi",
+                date: "2025-05-01",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1654
+            },
+            {
+                id: 16,
+                title: "Crystal Dreams",
+                description: "A crystal cave shows visitors their deepest desires.",
+                genre: "fantasy",
+                date: "2025-04-30",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 2100
+            },
+            {
+                id: 17,
+                title: "Hologram Love",
+                description: "A lonely programmer falls for an AI hologram.",
+                genre: "romance",
+                date: "2025-04-29",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1876
+            },
+            {
+                id: 18,
+                title: "The Vanishing Act",
+                description: "A magician's final trick makes them disappear forever.",
+                genre: "mystery",
+                date: "2025-04-28",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1432
+            },
+            {
+                id: 19,
+                title: "Robotic Pet Shop",
+                description: "A pet shop where all animals are incredibly lifelike robots.",
+                genre: "comedy",
+                date: "2025-04-27",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 2234
+            },
+            {
+                id: 20,
+                title: "The Haunted Algorithm",
+                description: "A coding error summons digital ghosts into reality.",
+                genre: "horror",
+                date: "2025-04-26",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1789
+            },
+            {
+                id: 21,
+                title: "Treasure of the Deep",
+                description: "Deep sea explorers find a treasure that doesn't want to be found.",
+                genre: "adventure",
+                date: "2025-04-25",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1567
+            },
+            {
+                id: 22,
+                title: "Neural Network",
+                description: "A scientist plugs into the internet with their mind.",
+                genre: "cyberpunk",
+                date: "2025-04-24",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1890
+            },
+            {
+                id: 23,
+                title: "The Time Garden",
+                description: "A garden where each flower blooms in a different time period.",
+                genre: "fantasy",
+                date: "2025-04-23",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 2045
+            },
+            {
+                id: 24,
+                title: "Space Elevator Blues",
+                description: "A maintenance worker finds love while fixing a space elevator.",
+                genre: "romance",
+                date: "2025-04-22",
+                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                views: 1723
+            },
+            {
+                id: 25,
+                title: "Space Elevator Blues",
+                description: "ASRM video, cutting hollow steel ball with knife.",
+                genre: "ASMR",
+                date: "2025-09-02",
+                thumbnail: "assets/videos/Hollow_Ball.mp4",
+                views: 1724
+            },
+            {
+                id: 26,
+                title: "Dark",
+                description: "From a single star, a universe is born, flourishes, and then fades back into the void.",
+                genre: "cosmic",
+                date: "2025-09-06",
+                thumbnail: "assets/videos/A_dark_void.mp4",
+                views: 1724
+            }
+        ];
+
+        let filteredData = [...videoData];
+        let currentPage = 1;
+        const itemsPerPage = 12;
+
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        body.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        // Sound button functionality
+        function toggleSound(videoId) {
+            const video = document.querySelector(`#video-${videoId}`);
+            const soundBtn = document.querySelector(`#sound-${videoId}`);
+            
+            if (video.muted) {
+                video.muted = false;
+                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                soundBtn.classList.remove('muted');
+                soundBtn.title = 'Mute';
+            } else {
+                video.muted = true;
+                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                soundBtn.classList.add('muted');
+                soundBtn.title = 'Unmute';
+            }
+        }
+
+        // Create video card HTML with sound control
+        function createVideoCard(video) {
+            return `
+                <div class="video-card" data-genre="${video.genre}">
+                    <div class="video-container">
+                        <video class="video-thumbnail" id="video-${video.id}" autoplay muted loop playsinline>
+                            <source src="${video.thumbnail}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button class="sound-btn muted" id="sound-${video.id}" onclick="toggleSound(${video.id})" title="Unmute">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <p class="video-description">${video.description}</p>
+                        <div class="video-meta">
+                            <span class="video-date">${formatDate(video.date)}</span>
+                            <span class="video-genre">${video.genre.charAt(0).toUpperCase() + video.genre.slice(1)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render videos
+        function renderVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            const startIndex = 0;
+            const endIndex = currentPage * itemsPerPage;
+            const videosToShow = filteredData.slice(startIndex, endIndex);
+            
+            if (videosToShow.length === 0) {
+                videoGrid.innerHTML = '';
+                document.getElementById('noResults').style.display = 'block';
+                document.getElementById('loadMoreBtn').style.display = 'none';
+            } else {
+                videoGrid.innerHTML = videosToShow.map(createVideoCard).join('');
+                document.getElementById('noResults').style.display = 'none';
+                
+                // Show/hide load more button
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (endIndex >= filteredData.length) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'block';
+                }
+            }
+            
+            // Update results count
+            document.getElementById('resultsCount').textContent = 
+                `Showing ${Math.min(endIndex, filteredData.length)} of ${filteredData.length} stories`;
+        }
+
+        // Filter and search functionality
+        function filterVideos() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const activeGenre = document.querySelector('.genre-tag.active').dataset.genre;
+            const sortBy = document.getElementById('sortSelect').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            
+            // Filter by search term
+            filteredData = videoData.filter(video => {
+                const matchesSearch = video.title.toLowerCase().includes(searchTerm) ||
+                                    video.description.toLowerCase().includes(searchTerm) ||
+                                    video.genre.toLowerCase().includes(searchTerm);
+                
+                const matchesGenre = activeGenre === 'all' || video.genre === activeGenre;
+                
+                // Date filtering
+                let matchesDate = true;
+                if (dateFilter !== 'all') {
+                    const videoDate = new Date(video.date);
+                    const now = new Date();
+                    const daysDiff = (now - videoDate) / (1000 * 60 * 60 * 24);
+                    
+                    switch(dateFilter) {
+                        case 'week':
+                            matchesDate = daysDiff <= 7;
+                            break;
+                        case 'month':
+                            matchesDate = daysDiff <= 30;
+                            break;
+                        case 'year':
+                            matchesDate = daysDiff <= 365;
+                            break;
+                    }
+                }
+                
+                return matchesSearch && matchesGenre && matchesDate;
+            });
+            
+            // Sort results
+            switch(sortBy) {
+                case 'popular':
+                    filteredData.sort((a, b) => b.views - a.views);
+                    break;
+                case 'az':
+                    filteredData.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'za':
+                    filteredData.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'genre':
+                    filteredData.sort((a, b) => a.genre.localeCompare(b.genre));
+                    break;
+                case 'latest':
+                default:
+                    filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    break;
+            }
+            
+            currentPage = 1;
+            renderVideos();
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterVideos);
+        document.getElementById('sortSelect').addEventListener('change', filterVideos);
+        document.getElementById('dateFilter').addEventListener('change', filterVideos);
+
+        // Genre tag functionality
+        document.querySelectorAll('.genre-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                document.querySelectorAll('.genre-tag').forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                filterVideos();
+            });
+        });
+
+        // Load more functionality
+        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+            currentPage++;
+            renderVideos();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderVideos();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        if (window.innerWidth < 768) {
+                            navLinks.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Make toggleSound function globally accessible
+        window.toggleSound = toggleSound;
+    </script>
+</body>
+</html>

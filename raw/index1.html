@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar by Jaiho</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* ========================================
+        CSS - STYLING THE COSMOS
+        ========================================
+        */
+
+        :root {
+            --primary-glow-color: #00aaff;
+            --secondary-glow-color: #ff00ff;
+            --primary-bg-color: #00000e;
+            --panel-bg-color: rgba(10, 25, 47, 0.75);
+            --panel-border-color: rgba(0, 170, 255, 0.3);
+            --text-primary-color: #ffffff;
+            --text-secondary-color: #e6f1ff; /* Made fonts brighter */
+            --font-primary: 'Orbitron', sans-serif;
+            --font-secondary: 'Rajdhani', sans-serif;
+            --border-radius: 12px;
+        }
+
+        /* --- General Body & Theme --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-bg-color);
+            color: var(--text-primary-color);
+            font-family: var(--font-secondary);
+            font-weight: 400;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand, .main-title {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--primary-glow-color);
+        }
+
+        a {
+            color: var(--primary-glow-color);
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px var(--primary-glow-color);
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-glow-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--primary-glow-color);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fff;
+        }
+
+
+        /* --- Animated Starfield & Parallax Background --- */
+        #parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+        
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+        }
+
+        #stars1 {
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-size: auto;
+            animation: move-stars 200s linear infinite;
+        }
+        #stars2 {
+            background-image: url('https://www.script-tutorials.com/demos/360/images/twinkling.png');
+            background-size: 1000px 1000px;
+            animation: move-stars 150s linear infinite reverse;
+        }
+        #stars3 {
+            background-image: url('https://www.script-tutorials.com/demos/360/images/clouds.png');
+            background-size: cover;
+            opacity: 0.1;
+            animation: move-stars 100s linear infinite;
+        }
+
+        @keyframes move-stars {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        /* --- Shooting Stars --- */
+        .shooting-star {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 12px 3px white, 0 0 22px 6px var(--primary-glow-color), 0 0 45px 12px var(--secondary-glow-color); /* Enhanced glow */
+            animation: shoot 5s linear infinite;
+            opacity: 0;
+            z-index: -5;
+        }
+        
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            width: 250px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+            transform-origin: right;
+            transform: translateX(-249px);
+        }
+        
+        @keyframes shoot {
+            0% { transform: translate(-100vw, -50vh) rotate(315deg); opacity: 1; }
+            30% { opacity: 1; }
+            100% { transform: translate(100vw, 50vh) rotate(315deg); opacity: 0; }
+        }
+
+        .shooting-star:nth-child(2) { animation-delay: 1.2s; top: 20%; left: 0; animation-duration: 4.5s; }
+        .shooting-star:nth-child(3) { animation-delay: 2.5s; top: 80%; left: 20%; animation-duration: 5.5s; }
+        .shooting-star:nth-child(4) { animation-delay: 3.2s; top: 10%; left: 50%; animation-duration: 4s; }
+        .shooting-star:nth-child(5) { animation-delay: 4.5s; top: 90%; left: 80%; animation-duration: 6s; }
+
+
+        /* --- Navbar --- */
+        .cosmic-nav {
+            background-color: rgba(0, 0, 14, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 0 25px rgba(0, 170, 255, 0.3);
+            border-bottom: 1px solid var(--panel-border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand {
+            letter-spacing: 2px;
+        }
+
+        .nav-link {
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0 10px;
+        }
+
+
+        /* --- Main Content & Hero Section --- */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #fff;
+            text-shadow: 0 0 15px var(--primary-glow-color), 0 0 25px var(--primary-glow-color), 0 0 40px var(--secondary-glow-color);
+            animation: pulse-title 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulse-title {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); } /* Slightly more pulse */
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: var(--text-secondary-color);
+            max-width: 800px;
+            font-weight: 400; /* Bolder for readability */
+            margin-top: 1rem;
+        }
+        
+        /* --- Search Bar --- */
+        .futuristic-search-bar {
+            position: relative;
+            max-width: 700px;
+            width: 100%;
+            margin: 2rem auto;
+        }
+        
+        .futuristic-search-bar .form-control {
+            background-color: var(--panel-bg-color);
+            border: 1px solid var(--panel-border-color);
+            color: var(--text-primary-color);
+            font-size: 1.2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 50px !important;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .futuristic-search-bar .form-control:focus {
+            background-color: rgba(10, 25, 47, 1);
+            box-shadow: 0 0 20px var(--primary-glow-color);
+            border-color: var(--primary-glow-color);
+            color: #fff;
+        }
+
+        .futuristic-search-bar .btn {
+            border-radius: 50px !important;
+            padding: 1rem 1.5rem;
+            font-family: var(--font-primary);
+            font-weight: 500;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--primary-glow-color), var(--secondary-glow-color));
+            border: none;
+            box-shadow: 0 0 15px var(--primary-glow-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .futuristic-search-bar .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--secondary-glow-color);
+        }
+
+        /* --- Search History --- */
+        #search-history-container {
+            max-width: 700px;
+            margin: 1rem auto;
+            text-align: left;
+        }
+        #search-history-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .history-item {
+            background: var(--panel-bg-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--panel-border-color);
+        }
+        .history-item:hover {
+            background: var(--primary-glow-color);
+            color: #000;
+        }
+
+        /* --- Featured APOD Section --- */
+        #apod-section {
+            padding: 6rem 1rem;
+            background: linear-gradient(rgba(0,0,0,0.5), var(--primary-bg-color));
+        }
+
+        .apod-card {
+            background-color: var(--panel-bg-color);
+            border: 1px solid var(--panel-border-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        #apod-image {
+            max-height: 70vh;
+            width: 100%;
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        /* --- Summary Section --- */
+        #summary-container {
+            background-color: var(--panel-bg-color);
+            border: 1px solid var(--panel-border-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        #summary-content {
+            font-family: var(--font-secondary);
+            font-weight: 400;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary-color);
+        }
+        #summary-content .spinner-border {
+            color: var(--primary-glow-color) !important;
+        }
+
+        /* --- Results Section --- */
+        #results-section {
+            padding: 6rem 1rem;
+            min-height: 100vh;
+        }
+
+        .nav-pills .nav-link {
+            color: var(--text-secondary-color);
+            background-color: rgba(10, 25, 47, 0.8);
+            margin: 0 5px;
+            border: 1px solid var(--panel-border-color);
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #fff;
+            background-color: var(--primary-glow-color);
+            box-shadow: 0 0 15px var(--primary-glow-color);
+            border-color: var(--primary-glow-color);
+        }
+
+        .result-card {
+            background-color: var(--panel-bg-color);
+            border: 1px solid var(--panel-border-color);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease-out;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); } /* Added scale for pop-in */
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.6);
+            border-color: var(--primary-glow-color);
+        }
+
+        .result-card .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--panel-border-color);
+            cursor: pointer;
+        }
+        
+        .result-card .card-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .result-card .card-title {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        
+        .result-card .card-text {
+            color: var(--text-secondary-color);
+            font-weight: 400;
+            flex-grow: 1;
+        }
+
+        .source-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-family: var(--font-primary);
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        #load-more-btn {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 30px;
+        }
+
+        /* --- Loader Animation --- */
+        #loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+        .pulsar {
+            --uib-size: 60px;
+            --uib-speed: 1.5s;
+            --uib-color: var(--primary-glow-color);
+            position: relative;
+            height: var(--uib-size);
+            width: var(--uib-size);
+        }
+        .pulsar::before, .pulsar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            background-color: var(--uib-color);
+            animation: pulse var(--uib-speed) ease-in-out infinite;
+            transform: scale(0);
+            opacity: 1;
+            box-shadow: 0 0 15px var(--uib-color);
+        }
+        .pulsar::after {
+            animation-delay: calc(var(--uib-speed) / -2);
+        }
+        @keyframes pulse {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .loading-text {
+            margin-top: 1.5rem;
+            font-family: var(--font-primary);
+            color: var(--primary-glow-color);
+            text-shadow: 0 0 10px var(--primary-glow-color);
+            letter-spacing: 1px;
+        }
+        
+
+        /* --- Image Modal --- */
+        .modal-content {
+            background-color: rgba(0, 0, 14, 0.9);
+            border: 1px solid var(--panel-border-color);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+        }
+
+        .modal-header, .modal-footer {
+            border-color: var(--panel-border-color);
+        }
+        
+        .modal-title {
+            color: var(--primary-glow-color);
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        #modal-image {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        #modal-description {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer --- */
+        .cosmic-footer {
+            background-color: rgba(0, 0, 14, 0.8);
+            text-align: center;
+            color: var(--text-secondary-color);
+            padding: 2rem 0;
+            border-top: 1px solid var(--panel-border-color);
+            font-weight: 300;
+        }
+
+        .cosmic-footer p {
+            margin: 0;
+            text-shadow: 0 0 8px var(--primary-glow-color);
+        }
+        
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            #apod-section, #results-section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div id="parallax-container">
+        <div class="layer" id="stars1" data-depth="0.1"></div>
+        <div class="layer" id="stars2" data-depth="0.3"></div>
+        <div class="layer" id="stars3" data-depth="0.5"></div>
+    </div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top cosmic-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-rocket me-2"></i> Stellar by Jaiho
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apod-section">Picture of the Day</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#results-section">Results</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Search Section -->
+    <header class="hero-section" id="hero">
+        <h1 class="main-title">Discover the Cosmos</h1>
+        <p class="subtitle">Your portal to the wonders of space. Search for galaxies, stars, exoplanets, and the latest discoveries from across the universe.</p>
+        
+        <form id="search-form" class="mt-4">
+  <div class="input-group futuristic-search-bar">
+    <input type="text" id="search-input" class="form-control" 
+           placeholder="e.g., 'Andromeda Galaxy' or 'Exoplanet Kepler-186f'" required>
+    <button class="btn btn-primary ms-2" type="submit" id="search-button" title="Initiate Search">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</form>
+
+
+        <div id="search-history-container">
+            <small class="text-secondary">Recent Searches:</small>
+            <ul id="search-history-list">
+                <!-- History items will be injected here -->
+            </ul>
+        </div>
+    </header>
+    
+    <!-- Main Content Area -->
+    <main>
+        <!-- Astronomy Picture of the Day -->
+        <section id="apod-section">
+            <div class="container">
+                <h2 class="text-center mb-5">Astronomy Picture of the Day</h2>
+                <div id="apod-container" class="card apod-card">
+                    <!-- APOD content will be loaded here -->
+                    <div class="p-5 text-center">
+                        <div class="spinner-border text-light" role="status">
+                            <span class="visually-hidden">Loading APOD...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section id="results-section" class="d-none">
+            <div class="container">
+                <h2 id="results-title" class="text-center mb-4">Search Results</h2>
+
+                <!-- Summary Section -->
+                <div id="summary-container" class="mb-5 d-none">
+                    <div id="summary-content" class="p-4">
+                        <!-- Summary will be injected here -->
+                    </div>
+                </div>
+                
+                <!-- Filter Tabs -->
+                <ul class="nav nav-pills justify-content-center mb-5" id="filter-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-filter="all" href="#">All Sources</a></li>
+                    <li class="nav-item"><a class="nav-link" data-filter="nasa" href="#">NASA Images</a></li>
+                    <li class="nav-item"><a class="nav-link" data-filter="wiki" href="#">Wikipedia</a></li>
+                    <li class="nav-item"><a class="nav-link" data-filter="news" href="#">Space News</a></li>
+                    <li class="nav-item"><a class="nav-link" data-filter="web" href="#">Web Search</a></li>
+                </ul>
+
+                <!-- Loader -->
+                <div id="loader" class="d-none">
+                    <div class="pulsar"></div>
+                    <p class="loading-text">Traversing the cosmos for data...</p>
+                </div>
+                
+                <!-- Results Grid -->
+                <div id="results-grid" class="row gx-4 gy-5">
+                    <!-- Results will be injected here -->
+                </div>
+
+                <!-- Load More Button -->
+                <div id="load-more-container" class="text-center mt-5 d-none">
+                    <button id="load-more-btn" class="btn btn-outline-light">Load More Discoveries</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="cosmic-footer">
+        <div class="container">
+            <p>Developed by Jaiho Labs &copy; 2025</p>
+        </div>
+    </footer>
+
+    <!-- Image Detail Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Image Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-8 text-center">
+                                <img id="modal-image" src="" alt="Enlarged view" class="img-fluid mb-3">
+                            </div>
+                            <div class="col-lg-4">
+                                <h4 id="modal-title"></h4>
+                                <p id="modal-description" class="text-secondary"></p>
+                                <p><small id="modal-metadata" class="text-muted"></small></p>
+                                <a id="modal-link" href="#" target="_blank" class="btn btn-outline-info">View Original Source</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+    /* ========================================
+    JAVASCRIPT - THE ENGINE OF THE COSMOS
+    ========================================
+    */
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- DOM ELEMENT SELECTORS ---
+        const searchForm = document.getElementById('search-form');
+        const searchInput = document.getElementById('search-input');
+        const resultsGrid = document.getElementById('results-grid');
+        const loader = document.getElementById('loader');
+        const resultsSection = document.getElementById('results-section');
+        const resultsTitle = document.getElementById('results-title');
+        const filterTabs = document.getElementById('filter-tabs');
+        const apodContainer = document.getElementById('apod-container');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        const parallaxContainer = document.getElementById('parallax-container');
+        const searchHistoryList = document.getElementById('search-history-list');
+        const summaryContainer = document.getElementById('summary-container');
+        const summaryContent = document.getElementById('summary-content');
+
+        // --- MODAL ELEMENTS ---
+        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalMetadata = document.getElementById('modal-metadata');
+        const modalLink = document.getElementById('modal-link');
+
+        // --- CONFIG & STATE MANAGEMENT ---
+        const NASA_API_KEY = 'DEMO_KEY'; // IMPORTANT: Replace with your own key from api.nasa.gov for full functionality
+        const appState = {
+            currentQuery: '',
+            allResults: [],
+            nasaPage: 1,
+            isLoading: false,
+            currentFilter: 'all',
+            searchHistory: JSON.parse(localStorage.getItem('searchHistory')) || [],
+        };
+
+        // --- INITIALIZATION ---
+        
+        /**
+         * Initializes the application by fetching the Astronomy Picture of the Day,
+         * setting up event listeners, and rendering the initial search history.
+         */
+        function initialize() {
+            fetchAPOD();
+            addEventListeners();
+            renderSearchHistory();
+        }
+
+        /**
+         * Attaches all necessary event listeners to the DOM elements.
+         */
+        function addEventListeners() {
+            searchForm.addEventListener('submit', handleSearchSubmit);
+            filterTabs.addEventListener('click', handleFilterClick);
+            loadMoreBtn.addEventListener('click', handleLoadMore);
+            window.addEventListener('scroll', handleParallaxScroll);
+            searchHistoryList.addEventListener('click', handleHistoryClick);
+        }
+
+
+        // --- EVENT HANDLERS ---
+        
+        /**
+         * Handles the search form submission.
+         * @param {Event} e The form submission event.
+         */
+        function handleSearchSubmit(e) {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (!query || appState.isLoading) return;
+            
+            appState.currentQuery = query;
+            appState.nasaPage = 1; // Reset page for new search
+            appState.allResults = []; // Clear previous results
+            summaryContainer.classList.add('d-none'); // Hide old summary
+            
+            updateSearchHistory(query);
+            fetchAllData(query);
+            
+            resultsSection.classList.remove('d-none');
+            window.scrollTo({ top: resultsSection.offsetTop - 70, behavior: 'smooth' });
+        }
+        
+        /**
+         * Handles clicks on the filter tabs to change the displayed result category.
+         * @param {Event} e The click event.
+         */
+        function handleFilterClick(e) {
+            e.preventDefault();
+            if (e.target.tagName !== 'A' || appState.isLoading) return;
+            
+            document.querySelector('#filter-tabs .nav-link.active').classList.remove('active');
+            e.target.classList.add('active');
+            
+            appState.currentFilter = e.target.getAttribute('data-filter');
+            renderResults();
+        }
+        
+        /**
+         * Handles the "Load More" button click, specifically for NASA results.
+         */
+        function handleLoadMore() {
+            if (appState.isLoading) return;
+            appState.nasaPage++;
+            fetchNasaImages(appState.currentQuery, true); // `true` to append results
+        }
+        
+        /**
+         * Creates a simple parallax effect on the background stars on scroll.
+         */
+        function handleParallaxScroll() {
+            const scrollTop = window.pageYOffset;
+            const layers = parallaxContainer.children;
+            for(let i = 0; i < layers.length; i++) {
+                const depth = layers[i].getAttribute('data-depth');
+                const movement = -(scrollTop * depth);
+                layers[i].style.transform = `translateY(${movement}px)`;
+            }
+        }
+        
+        /**
+         * Handles clicks on search history items to perform a new search.
+         * @param {Event} e The click event.
+         */
+        function handleHistoryClick(e) {
+            if (e.target.classList.contains('history-item')) {
+                const query = e.target.textContent;
+                searchInput.value = query;
+                handleSearchSubmit(new Event('submit', { cancelable: true }));
+            }
+        }
+
+
+        // --- API FETCH FUNCTIONS ---
+
+        /**
+         * Fetches a concise summary from the Gemini API.
+         * @param {string} query The search term.
+         * @returns {Promise<string>} A promise that resolves to the summary text.
+         */
+        async function fetchSummary(query) {
+            summaryContainer.classList.remove('d-none');
+            summaryContent.innerHTML = `
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="spinner-border spinner-border-sm me-3" role="status"></div>
+                    <span>Generating Cosmic Summary...</span>
+                </div>`;
+
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const systemPrompt = "You are a helpful assistant for a space exploration search engine. Your role is to provide a concise, engaging, one-paragraph summary (about 3-4 sentences) for the given topic. The tone should be informative and awe-inspiring, suitable for astronomy enthusiasts.";
+            
+            const payload = {
+                contents: [{ parts: [{ text: `Summarize: ${query}` }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) return text;
+                throw new Error("No summary text found in API response.");
+            } catch (error) {
+                console.error("Summary Fetch Error:", error);
+                return null;
+            }
+        }
+        
+        /**
+         * Fetches data from all configured APIs in parallel.
+         * @param {string} query The user's search query.
+         */
+        async function fetchAllData(query) {
+            setLoading(true);
+            resultsTitle.textContent = `Search Results for "${query}"`;
+
+            try {
+                const [summary, nasaResults, wikiResults, newsResults] = await Promise.all([
+                    fetchSummary(query),
+                    fetchNasaImages(query, false),
+                    fetchWikipedia(query),
+                    fetchSpaceNews(query)
+                ]);
+                
+                renderSummary(summary);
+
+                const webResults = [{
+                    source: 'Web',
+                    title: `Search for "${query}" on DuckDuckGo`,
+                    description: `For a broader search, explore results from across the web.`,
+                    imageUrl: 'https://via.placeholder.com/400x220/00000e/FFFFFF?text=Web+Search',
+                    link: `https://duckduckgo.com/?q=${encodeURIComponent(query)}`
+                }];
+
+                appState.allResults = [...nasaResults, ...wikiResults, ...newsResults, ...webResults];
+                appState.allResults.sort(() => Math.random() - 0.5);
+                renderResults();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                resultsGrid.innerHTML = `<p class="col-12 text-center text-danger">A cosmic anomaly occurred. Failed to fetch data. Please try again.</p>`;
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        /**
+         * Fetches image data from the NASA Image & Video Library API.
+         * @param {string} query The search term.
+         * @param {boolean} append If true, appends results to the existing state.
+         * @returns {Promise<Array>} A promise that resolves to an array of formatted results.
+         */
+        async function fetchNasaImages(query, append = false) {
+            setLoading(true, append);
+            try {
+                const response = await fetch(`https://images-api.nasa.gov/search?q=${query}&media_type=image&page=${appState.nasaPage}`);
+                if (!response.ok) throw new Error(`NASA API Error: ${response.statusText}`);
+                const data = await response.json();
+                
+                const formattedResults = data.collection.items.map(item => ({
+                    source: 'NASA',
+                    title: item.data[0].title,
+                    description: item.data[0].description ? item.data[0].description.substring(0, 150) + '...' : 'No description available.',
+                    imageUrl: item.links[0].href,
+                    link: `https://images.nasa.gov/details-${item.data[0].nasa_id}`,
+                    fullDescription: item.data[0].description,
+                    date: item.data[0].date_created,
+                }));
+
+                if (append) {
+                    appState.allResults = [...appState.allResults, ...formattedResults];
+                    renderResults(true); // Re-render with appended data
+                } else {
+                    return formattedResults;
+                }
+            } catch (error) {
+                console.error("NASA Fetch Error:", error);
+                return [];
+            } finally {
+                setLoading(false, append);
+            }
+        }
+
+        /**
+         * Fetches search results from the Wikipedia API.
+         * @param {string} query The search term.
+         * @returns {Promise<Array>} A promise that resolves to an array of formatted results.
+         */
+        async function fetchWikipedia(query) {
+            try {
+                const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${query}&format=json&origin=*`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Wikipedia API response not OK');
+                const data = await response.json();
+
+                return data.query.search.slice(0, 10).map(item => ({
+                    source: 'Wiki',
+                    title: item.title,
+                    description: item.snippet.replace(/<[^>]*>/g, '').substring(0, 150) + '...',
+                    imageUrl: 'https://via.placeholder.com/400x220/00000e/FFFFFF?text=Wikipedia',
+                    link: `https://en.wikipedia.org/?curid=${item.pageid}`
+                }));
+            } catch (error) {
+                console.error("Wikipedia Fetch Error:", error);
+                return [];
+            }
+        }
+
+        /**
+         * Fetches articles from the Spaceflight News API.
+         * @param {string} query The search term.
+         * @returns {Promise<Array>} A promise that resolves to an array of formatted results.
+         */
+        async function fetchSpaceNews(query) {
+            try {
+                const url = `https://api.spaceflightnewsapi.net/v4/articles/?search=${query}&limit=10`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Spaceflight News API response not OK');
+                const data = await response.json();
+                
+                return data.results.map(item => ({
+                    source: 'News',
+                    title: item.title,
+                    description: item.summary.substring(0, 150) + '...',
+                    imageUrl: item.image_url,
+                    link: item.url
+                }));
+            } catch (error) {
+                console.error("Space News Fetch Error:", error);
+                return [];
+            }
+        }
+        
+        /**
+         * Fetches NASA's Astronomy Picture of the Day.
+         */
+        async function fetchAPOD() {
+            try {
+                const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
+                if (!response.ok) throw new Error('APOD API response not OK');
+                const data = await response.json();
+                renderAPOD(data);
+            } catch (error) {
+                console.error("APOD Fetch Error:", error);
+                apodContainer.innerHTML = `<p class="text-center text-danger p-4">Could not load the Picture of the Day.</p>`;
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+
+        /**
+         * Renders the fetched summary into its container.
+         * @param {string|null} summaryText The summary text, or null if it failed.
+         */
+        function renderSummary(summaryText) {
+            if (summaryText) {
+                summaryContainer.classList.remove('d-none');
+                summaryContent.innerHTML = summaryText;
+            } else {
+                summaryContainer.classList.add('d-none');
+                summaryContent.innerHTML = '';
+            }
+        }
+        
+        /**
+         * Renders the search results to the grid based on the current filter.
+         * @param {boolean} append - If true, appends cards instead of clearing the grid.
+         */
+        function renderResults(append = false) {
+            if (!append) {
+                resultsGrid.innerHTML = '';
+            }
+
+            let filteredResults = appState.allResults;
+            if (appState.currentFilter !== 'all') {
+                filteredResults = appState.allResults.filter(result => result.source.toLowerCase() === appState.currentFilter);
+            }
+            
+            // If appending, we only need to render the new items
+            const resultsToRender = append ? 
+                filteredResults.slice(resultsGrid.children.length) :
+                filteredResults;
+
+            if (resultsToRender.length === 0 && !append) {
+                resultsGrid.innerHTML = `<p class="col-12 text-center text-light">No results found in this cosmic sector for filter: ${appState.currentFilter}.</p>`;
+            } else {
+                resultsToRender.forEach((item, index) => {
+                    const card = createResultCard(item);
+                    card.style.animationDelay = `${index * 50}ms`;
+                    resultsGrid.appendChild(card);
+                });
+            }
+
+            // Show/hide "Load More" button only for NASA filter
+            if (appState.currentFilter === 'nasa' || appState.currentFilter === 'all') {
+                loadMoreContainer.classList.remove('d-none');
+            } else {
+                loadMoreContainer.classList.add('d-none');
+            }
+        }
+
+        /**
+         * Creates an HTML element for a single result card.
+         * @param {object} item The result item data.
+         * @returns {HTMLElement} The created card element.
+         */
+        function createResultCard(item) {
+            const col = document.createElement('div');
+            col.className = 'col-md-6 col-lg-4 mb-4';
+
+            const badgeColor = {
+                'NASA': 'bg-primary',
+                'Wiki': 'bg-secondary',
+                'News': 'bg-success',
+                'Web': 'bg-info',
+            }[item.source] || 'bg-dark';
+
+            const cardHTML = `
+                <div class="card result-card h-100">
+                    <img src="${item.imageUrl || 'https://via.placeholder.com/400x220/00000e/FFFFFF?text=Image+Not+Found'}" 
+                         class="card-img-top" 
+                         alt="${item.title}" 
+                         onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220/00000e/FFFFFF?text=Image+Error';"
+                         data-source="${item.source}">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.description}</p>
+                        <a href="${item.link}" target="_blank" class="btn btn-outline-info mt-auto stretched-link">Explore &rarr;</a>
+                    </div>
+                    <span class="badge ${badgeColor} source-badge">${item.source}</span>
+                </div>
+            `;
+            col.innerHTML = cardHTML;
+            
+            const img = col.querySelector('.card-img-top');
+            if(item.source === 'NASA') {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openImageModal(item);
+                });
+            }
+
+            return col;
+        }
+
+        /**
+         * Renders the fetched APOD data into its container.
+         * @param {object} data The APOD data object.
+         */
+        function renderAPOD(data) {
+            const isVideo = data.media_type === 'video';
+            const mediaHTML = isVideo ?
+                `<div class="ratio ratio-16x9"><iframe src="${data.url}" title="${data.title}" frameborder="0" allowfullscreen></iframe></div>` :
+                `<img id="apod-image" src="${data.hdurl || data.url}" class="card-img-top" alt="${data.title}">`;
+
+            apodContainer.innerHTML = `
+                ${mediaHTML}
+                <div class="card-body p-4">
+                    <h3 class="card-title">${data.title}</h3>
+                    <p class="card-text text-secondary">${new Date(data.date).toDateString()}</p>
+                    <p class="card-text">${data.explanation}</p>
+                    ${data.copyright ? `<p class="card-text text-muted"><small>Credit: ${data.copyright}</small></p>` : ''}
+                </div>
+            `;
+        }
+        
+        /**
+         * Renders the search history items below the search bar.
+         */
+        function renderSearchHistory() {
+            searchHistoryList.innerHTML = appState.searchHistory.map(term => 
+                `<li class="history-item">${term}</li>`
+            ).join('');
+        }
+
+        
+        // --- UI & STATE UTILITY FUNCTIONS ---
+
+        /**
+         * Toggles the loading state of the application.
+         * @param {boolean} isLoading True to show loader, false to hide.
+         * @param {boolean} isAppending If true, updates the 'Load More' button state.
+         */
+        function setLoading(isLoading, isAppending = false) {
+            appState.isLoading = isLoading;
+            if (isAppending) {
+                loadMoreBtn.disabled = isLoading;
+                loadMoreBtn.innerHTML = isLoading ? '<span class="spinner-border spinner-border-sm"></span> Loading...' : 'Load More Discoveries';
+            } else {
+                if (isLoading) {
+                    loader.classList.remove('d-none');
+                    resultsGrid.classList.add('d-none');
+                } else {
+                    loader.classList.add('d-none');
+                    resultsGrid.classList.remove('d-none');
+                }
+            }
+        }
+        
+        /**
+         * Opens the modal with details of a specific image.
+         * @param {object} item The data object for the image.
+         */
+        function openImageModal(item) {
+            modalImage.src = item.imageUrl;
+            modalTitle.textContent = item.title;
+            modalDescription.textContent = item.fullDescription || 'No detailed description available.';
+            modalMetadata.textContent = `Date Created: ${new Date(item.date).toLocaleDateString()}`;
+            modalLink.href = item.link;
+            imageModal.show();
+        }
+
+        /**
+         * Updates the search history array and saves it to localStorage.
+         * @param {string} query The new query to add.
+         */
+        function updateSearchHistory(query) {
+            // Remove if already exists to move it to the front
+            const existingIndex = appState.searchHistory.indexOf(query);
+            if (existingIndex > -1) {
+                appState.searchHistory.splice(existingIndex, 1);
+            }
+            // Add to the front
+            appState.searchHistory.unshift(query);
+            // Keep history to a reasonable size (e.g., 5 items)
+            if (appState.searchHistory.length > 5) {
+                appState.searchHistory.pop();
+            }
+            localStorage.setItem('searchHistory', JSON.stringify(appState.searchHistory));
+            renderSearchHistory();
+        }
+
+
+        // --- LET THE JOURNEY BEGIN ---
+        initialize();
+    });
+    </script>
+</body>
+</html>
+

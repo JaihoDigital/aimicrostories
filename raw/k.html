@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Micro Stories — Tiny Worlds, Daily</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AI Micro Stories - Daily collection of 8-second AI-generated micro-stories">
+    <meta property="og:title" content="AI Micro Stories - 8-Second AI Stories">
+    <meta property="og:description" content="Concepts by Jaiho Labs • Prompts with ChatGPT • Visuals from Veo">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        :root {
+            --cosmic-dark: #0F1724;
+            --soft-cream: #F9F7F3;
+            --neon-teal: #00E5B5;
+            --warm-coral: #FF6B5F;
+            --violet: #6C5CE7;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Theme Styles */
+        body.light {
+            background-color: var(--soft-cream);
+            color: var(--cosmic-dark);
+        }
+
+        body.dark {
+            background-color: var(--cosmic-dark);
+            color: var(--soft-cream);
+        }
+
+        h1, h2, h3 {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-teal), var(--violet), var(--warm-coral));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.4s ease;
+        }
+
+        .header.scrolled {
+            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 36, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light .header.scrolled {
+            background: rgba(249, 247, 243, 0.9);
+            border-bottom: 1px solid rgba(15, 23, 36, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo Animation */
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(-45deg, var(--neon-teal), var(--violet), var(--warm-coral), var(--neon-teal));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 10px rgba(0, 229, 181, 0.5));
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-teal), var(--violet));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--neon-teal);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--neon-teal) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-toggle:hover::before {
+            opacity: 0.2;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 0 20px rgba(0, 229, 181, 0.4);
+        }
+
+        .theme-icon {
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            color: var(--violet);
+        }
+
+        .theme-toggle:hover .theme-icon {
+            color: var(--neon-teal);
+            transform: scale(1.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, #1a2332 50%, var(--violet) 100%);
+            overflow: hidden;
+        }
+
+        #starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, var(--neon-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-description span {
+            font-weight: 600;
+        }
+
+        .hero-description .teal { color: var(--neon-teal); }
+        .hero-description .violet { color: var(--violet); }
+        .hero-description .coral { color: var(--warm-coral); }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-teal), var(--violet));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 229, 181, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--warm-coral);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 95, 0.4);
+            background: var(--warm-coral);
+        }
+
+        /* Stories Section */
+        .stories-section {
+            padding: 5rem 2rem;
+            background: var(--soft-cream);
+            transition: background-color 0.4s ease;
+        }
+
+        body.dark .stories-section {
+            background: var(--cosmic-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--violet), var(--neon-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        body.light .story-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .story-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--violet), var(--neon-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .story-card:hover .story-video {
+            transform: scale(1.1);
+        }
+
+        .story-info {
+            padding: 1.5rem;
+        }
+
+        .story-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: inherit;
+        }
+
+        .story-caption {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        body.light .story-caption {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .genre-tag {
+            background: linear-gradient(135deg, var(--neon-teal), var(--violet));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .story-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: linear-gradient(135deg, var(--violet), var(--warm-coral));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, var(--violet) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .about-text span {
+            font-weight: 600;
+        }
+
+        .about-text .teal { color: var(--neon-teal); }
+        .about-text .violet { color: #a78bfa; }
+        .about-text .coral { color: var(--warm-coral); }
+
+        /* Team Section */
+        .team-section {
+            padding: 5rem 2rem;
+            background: var(--soft-cream);
+            transition: background-color 0.4s ease;
+        }
+
+        body.dark .team-section {
+            background: var(--cosmic-dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.light .team-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--neon-teal) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) rotateY(10deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--violet), var(--neon-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-card:hover .team-icon {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-role {
+            opacity: 0.7;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--cosmic-dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--neon-teal);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: currentColor;
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover::before {
+            opacity: 0.2;
+            transform: scale(1);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: var(--neon-teal);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, var(--neon-teal), var(--violet));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 229, 181, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-teal);
+            animation: shoot 8s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100px) translateY(100px);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateX(100vw) translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cosmic-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-teal), var(--violet));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--violet), var(--warm-coral));
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo">AI Micro Stories</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#stories" class="nav-link">Stories</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#team" class="nav-link">Team</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon theme-icon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="starfield" width="1920" height="1080"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">8-Second AI Micro Stories</h1>
+            <h2 class="hero-subtitle fade-in">tiny worlds, daily.</h2>
+            <p class="hero-description fade-in">
+                Concepts by <span class="teal">Jaiho Labs</span> • Prompts with <span class="violet">ChatGPT</span> • Visuals from <span class="coral">Veo</span>
+            </p>
+            <div class="cta-buttons fade-in">
+                <a href="#stories" class="btn btn-primary">Watch Stories</a>
+                <a href="https://instagram.com" target="_blank" class="btn btn-secondary">Follow on Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section class="stories-section" id="stories">
+        <div class="container">
+            <h2 class="section-title fade-in">Latest Stories</h2>
+            <div class="stories-grid" id="storiesGrid">
+                <!-- Stories will be loaded dynamically -->
+            </div>
+            <div class="load-more-container">
+                <button class="load-more-btn" id="loadMoreBtn">Load More Stories</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title fade-in">About the Project</h2>
+                <p class="about-text fade-in">
+                    AI Micro Stories is a creative experiment bringing 8-second cinematic AI shorts to life. Stories are imagined by <span class="teal">Jaiho Labs</span>, co-written with <span class="violet">ChatGPT</span>, and rendered visually by <span class="coral">Veo</span>. Each micro-story captures a complete narrative arc in just eight seconds, proving that the most powerful stories don't need long to leave a lasting impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <h2 class="section-title fade-in">The Creative Team</h2>
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <div class="team-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="team-name">Jaiho Labs</h3>
+                    <p class="team-role">Creator & Director</p>
+                </div>
+                <div class="team-card fade-in">
+                    <div class="team-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="team-name">ChatGPT</h3>
+                    <p class="team-role">Co-Writer & Creative Partner</p>
+                </div>
+                <div class="team-card fade-in">
+                    <div class="team-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="team-name">Veo</h3>
+                    <p class="team-role">Visual Story Generator</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="shooting-star" style="top: 20%; animation-delay: 0s;"></div>
+        <div class="shooting-star" style="top: 60%; animation-delay: 3s;"></div>
+        <div class="shooting-star" style="top: 80%; animation-delay: 6s;"></div>
+        
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Follow Our Journey</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" class="social-link" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://facebook.com" class="social-link" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" class="social-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Subscribe for Daily Stories</h3>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>hello@aimicrostories.com</p>
+                <p>Built with ❤️ by Jaiho Labs</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AI Micro Stories • Powered by Jaiho Labs</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Theme Management
+        class ThemeManager {
+            constructor() {
+                this.body = document.body;
+                this.themeToggle = document.getElementById('themeToggle');
+                this.themeIcon = document.getElementById('themeIcon');
+                this.init();
+            }
+
+            init() {
+                this.loadTheme();
+                this.themeToggle.addEventListener('click', () => this.toggleTheme());
+            }
+
+            loadTheme() {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                this.setTheme(savedTheme);
+            }
+
+            setTheme(theme) {
+                this.body.className = theme;
+                if (theme === 'dark') {
+                    this.themeIcon.className = 'fas fa-moon theme-icon';
+                } else {
+                    this.themeIcon.className = 'fas fa-sun theme-icon';
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            toggleTheme() {
+                const currentTheme = this.body.className;
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                // Add rotation animation
+                gsap.to(this.themeToggle, {
+                    rotation: 360,
+                    duration: 0.6,
+                    ease: "back.out(1.7)"
+                });
+                
+                setTimeout(() => {
+                    this.setTheme(newTheme);
+                }, 200);
+            }
+        }
+
+        // Scroll Progress Bar
+        class ScrollProgress {
+            constructor() {
+                this.progressBar = document.getElementById('scrollProgress');
+                this.init();
+            }
+
+            init() {
+                window.addEventListener('scroll', () => this.updateProgress());
+            }
+
+            updateProgress() {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
+                this.progressBar.style.width = scrollPercent + '%';
+            }
+        }
+
+        // Header Scroll Effect
+        class HeaderEffects {
+            constructor() {
+                this.header = document.getElementById('header');
+                this.init();
+            }
+
+            init() {
+                window.addEventListener('scroll', () => this.handleScroll());
+            }
+
+            handleScroll() {
+                if (window.scrollY > 100) {
+                    this.header.classList.add('scrolled');
+                } else {
+                    this.header.classList.remove('scrolled');
+                }
+            }
+        }
+
+        // Starfield Animation
+        class Starfield {
+            constructor() {
+                this.canvas = document.getElementById('starfield');
+                this.ctx = this.canvas.getContext('2d');
+                this.stars = [];
+                this.animationId = null;
+                this.init();
+            }
+
+            init() {
+                this.resizeCanvas();
+                this.createStars();
+                this.animate();
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
+
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            createStars() {
+                this.stars = [];
+                const numStars = Math.floor(window.innerWidth * window.innerHeight / 3000);
+                
+                for (let i = 0; i < numStars; i++) {
+                    this.stars.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        radius: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.8 + 0.2,
+                        opacitySpeed: (Math.random() - 0.5) * 0.02,
+                        color: `hsl(${Math.random() * 60 + 180}, 70%, 80%)`
+                    });
+                }
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.stars.forEach(star => {
+                    star.opacity += star.opacitySpeed;
+                    if (star.opacity <= 0.1 || star.opacity >= 1) {
+                        star.opacitySpeed *= -1;
+                    }
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    this.ctx.fillStyle = star.color;
+                    this.ctx.globalAlpha = star.opacity;
+                    this.ctx.fill();
+                    
+                    // Add glow
+                    this.ctx.shadowBlur = 5;
+                    this.ctx.shadowColor = star.color;
+                    this.ctx.fill();
+                    this.ctx.shadowBlur = 0;
+                });
+                
+                this.ctx.globalAlpha = 1;
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+
+        // Stories Manager
+        class StoriesManager {
+            constructor() {
+                this.grid = document.getElementById('storiesGrid');
+                this.loadMoreBtn = document.getElementById('loadMoreBtn');
+                this.stories = [
+                    {
+                        title: 'The Last Library',
+                        caption: 'A robot discovers the final books in a post-apocalyptic world.',
+                        genre: 'Sci-Fi',
+                        date: 'Dec 15',
+                        icon: '📚'
+                    },
+                    {
+                        title: 'Digital Dreams',
+                        caption: 'An AI experiences its first dream in electric colors.',
+                        genre: 'Fantasy',
+                        date: 'Dec 14',
+                        icon: '🌙'
+                    },
+                    {
+                        title: 'Quantum Coffee',
+                        caption: 'A barista serves coffee across multiple dimensions.',
+                        genre: 'Comedy',
+                        date: 'Dec 13',
+                        icon: '☕'
+                    },
+                    {
+                        title: 'Space Garden',
+                        caption: 'A lonely astronaut tends to flowers on Mars.',
+                        genre: 'Drama',
+                        date: 'Dec 12',
+                        icon: '🌱'
+                    },
+                    {
+                        title: 'Time Loop Café',
+                        caption: 'A customer relives the same coffee order infinitely.',
+                        genre: 'Mystery',
+                        date: 'Dec 11',
+                        icon: '⏰'
+                    },
+                    {
+                        title: 'Robot Love',
+                        caption: 'Two AIs fall in love through binary poetry.',
+                        genre: 'Romance',
+                        date: 'Dec 10',
+                        icon: '💕'
+                    },
+                    {
+                        title: 'Invisible Music',
+                        caption: 'A street musician plays melodies only ghosts can hear.',
+                        genre: 'Fantasy',
+                        date: 'Dec 9',
+                        icon: '🎵'
+                    },
+                    {
+                        title: 'Memory Bank',
+                        caption: 'A hacker steals forgotten childhood memories.',
+                        genre: 'Thriller',
+                        date: 'Dec 8',
+                        icon: '🧠'
+                    }
+                ];
+                this.loadedCount = 0;
+                this.loadPerBatch = 4;
+                this.init();
+            }
+
+            init() {
+                this.loadStories();
+                this.loadMoreBtn.addEventListener('click', () => this.loadMore());
+            }
+
+            createStoryCard(story, index) {
+                const card = document.createElement('div');
+                card.className = 'story-card fade-in';
+                card.innerHTML = `
+                    <div class="story-thumbnail">
+                        <div style="font-size: 4rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));">
+                            ${story.icon}
+                        </div>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">${story.title}</h3>
+                        <p class="story-caption">${story.caption}</p>
+                        <div class="story-meta">
+                            <span class="genre-tag">${story.genre}</span>
+                            <span class="story-date">${story.date}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Add hover video effect simulation
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, { y: -10, scale: 1.02, duration: 0.3, ease: 'power2.out' });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+
+                return card;
+            }
+
+            loadStories() {
+                const endIndex = Math.min(this.loadedCount + this.loadPerBatch, this.stories.length);
+                const batch = this.stories.slice(this.loadedCount, endIndex);
+
+                batch.forEach((story, index) => {
+                    const card = this.createStoryCard(story, index);
+                    this.grid.appendChild(card);
+
+                    // Animate card entrance
+                    gsap.fromTo(card, 
+                        { opacity: 0, y: 60, scale: 0.8 },
+                        { 
+                            opacity: 1, 
+                            y: 0, 
+                            scale: 1,
+                            duration: 0.6,
+                            delay: index * 0.1,
+                            ease: 'back.out(1.7)'
+                        }
+                    );
+                });
+
+                this.loadedCount = endIndex;
+
+                if (this.loadedCount >= this.stories.length) {
+                    this.loadMoreBtn.style.display = 'none';
+                }
+            }
+
+            loadMore() {
+                this.loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                this.loadMoreBtn.disabled = true;
+
+                setTimeout(() => {
+                    this.loadStories();
+                    this.loadMoreBtn.innerHTML = 'Load More Stories';
+                    this.loadMoreBtn.disabled = false;
+                }, 800);
+            }
+        }
+
+        // Fade In Animation Observer
+        class FadeInObserver {
+            constructor() {
+                this.observer = null;
+                this.init();
+            }
+
+            init() {
+                const options = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, options);
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    this.observer.observe(el);
+                });
+            }
+        }
+
+        // Smooth Scrolling
+        class SmoothScroll {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            const offsetTop = target.offsetTop - 80;
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+        }
+
+        // Newsletter Form
+        class Newsletter {
+            constructor() {
+                this.form = document.getElementById('newsletterForm');
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                const input = this.form.querySelector('.newsletter-input');
+                const btn = this.form.querySelector('.newsletter-btn');
+                
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+                    input.value = '';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = 'Subscribe';
+                        btn.disabled = false;
+                    }, 2000);
+                }, 1000);
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize all components
+            const themeManager = new ThemeManager();
+            const scrollProgress = new ScrollProgress();
+            const headerEffects = new HeaderEffects();
+            const starfield = new Starfield();
+            const storiesManager = new StoriesManager();
+            const fadeInObserver = new FadeInObserver();
+            const smoothScroll = new SmoothScroll();
+            const newsletter = new Newsletter();
+
+            // GSAP Animations
+            gsap.utils.toArray('.fade-in').forEach((element, i) => {
+                gsap.fromTo(element, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            // Team cards special animation
+            gsap.utils.toArray('.team-card').forEach((card, i) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    rotationY: 90,
+                    scale: 0.8
+                }, {
+                    opacity: 1,
+                    rotationY: 0,
+                    scale: 1,
+                    duration: 1,
+                    delay: i * 0.2,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%'
+                    }
+                });
+            });
+
+            console.log('AI Micro Stories website initialized successfully! 🚀');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Micro Stories - Daily 8-Second AI Stories</title>
+    <meta name="description" content="Daily collection of 8-second AI-generated micro-stories. Tiny worlds, created daily with AI.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimicrostories.com/">
+    <meta property="og:title" content="AI Micro Stories - 8-Second AI Stories">
+    <meta property="og:description" content="Daily collection of 8-second AI-generated micro-stories. Tiny worlds, created daily with AI.">
+    <meta property="og:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aimicrostories.com/">
+    <meta property="twitter:title" content="AI Micro Stories - 8-Second AI Stories">
+    <meta property="twitter:description" content="Daily collection of 8-second AI-generated micro-stories. Tiny worlds, created daily with AI.">
+    <meta property="twitter:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <style>
+        :root {
+            /* Color Variables */
+            --cosmic-dark: #0F1724;
+            --soft-cream: #F9F7F3;
+            --neon-teal: #00E5B5;
+            --warm-coral: #FF6B5F;
+            --violet: #6C5CE7;
+            --dark-blue: #1E2A3A;
+            --light-gray: #E2E8F0;
+            --medium-gray: #718096;
+            
+            /* Theme Variables (Dark by default) */
+            --bg-primary: var(--cosmic-dark);
+            --bg-secondary: var(--dark-blue);
+            --text-primary: var(--soft-cream);
+            --text-secondary: #CBD5E0;
+            --accent: var(--neon-teal);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(30, 42, 58, 0.7);
+            --nav-bg: rgba(15, 23, 36, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--soft-cream);
+            --bg-secondary: #ffffff;
+            --text-primary: var(--cosmic-dark);
+            --text-secondary: #4A5568;
+            --accent: var(--violet);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(249, 247, 243, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark theme adjustment for accent color #00E5B5 which is too bright */
+        [data-theme="dark"] {
+            --accent: #26c6a7; /* softer teal shade */
+            --accent-hover: #1da58a;
+            --load-more-btn-color: #26c6a7;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            position: absolute;
+            transform: translateY(40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-moon {
+            transform: translateY(-40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-sun {
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 229, 181, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Canvas for background animations */
+        #starCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Story Grid Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .stories-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            box-shadow: var(--card-shadow);
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .story-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .story-info {
+            padding: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .story-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .story-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .story-genre {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .instagram-embed {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Load more button override in dark theme */
+        [data-theme="dark"] .load-more-btn {
+            background: #26c6a7;
+            color: var(--cosmic-dark);
+        }
+
+        .load-more-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(38, 198, 167, 0.4);
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--violet) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .about {
+            background: linear-gradient(135deg, #a7c0fd 0%, #d9b2ff 100%);
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: var(--soft-cream);
+        }
+
+        [data-theme="light"] .about p {
+            color: var(--cosmic-dark);
+        }
+
+        .ai-illustration {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            height: 200px;
+            position: relative;
+        }
+
+        .ai-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            background: var(--neon-teal);
+            top: 20px;
+            left: calc(50% - 60px);
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            background: var(--warm-coral);
+            top: 60px;
+            left: calc(30% - 40px);
+            animation: pulse 4s infinite ease-in-out 1s;
+        }
+
+        .circle-3 {
+            width: 60px;
+            height: 60px;
+            background: var(--violet);
+            top: 100px;
+            left: calc(70% - 30px);
+            animation: pulse 4s infinite ease-in-out 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--neon-teal) 0%, var(--violet) 100%);
+            color: white;
+            font-size: 2rem;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .team-role {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cosmic-dark);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] footer {
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+        }
+
+        /* Footer text color fix in light theme */
+        [data-theme="light"] footer .social-section h3, 
+        [data-theme="light"] footer .subscribe-section h3 {
+            color: var(--soft-cream);
+        }
+
+        [data-theme="light"] footer .copyright {
+            color: var(--soft-cream);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .social-section h3, .subscribe-section h3 {
+            color: var(--soft-cream);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] footer .social-link {
+            color: var(--soft-cream);
+            background: rgba(15, 23, 36, 0.8);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="light"] footer .social-link:hover {
+            background: var(--violet);
+            color: var(--soft-cream);
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-input {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--dark-blue);
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-btn {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(38, 198, 167, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--soft-cream);
+        }
+
+        /* Shooting star animation for footer */
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            20%, 100% {
+                transform: translateX(1000%) translateY(1000%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .shooting-star {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #26c6a7, transparent);
+            animation: shootingStar 3s linear infinite;
+            opacity: 0;
+        }
+
+        /* Media Queries */
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .stories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .stories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .video-container {
+    position: relative;
+}
+.sound-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.sound-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">AI Micro Stories</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#stories">Stories</a></li>
+                    <li><a href="explore_more.html">Portfolio</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="starCanvas"></canvas>
+        <div class="container">
+            <div class="hero-content">
+                <h1>8-Second AI Micro Stories<br><span style="font-size: 1.8rem;">tiny worlds, daily.</span></h1>
+                <p>Concepts by Jaiho Labs • Prompts with ChatGPT • Visuals from Veo</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary">Watch Stories</button>
+                    <button class="btn btn-secondary">Follow on Instagram</button>
+                    
+                </div>
+                <br>
+                <button id="socialBtn" class="btn btn-secondary">
+                  Follow our other social media platforms ✨
+                </button> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Grid Section -->
+    <section id="stories" class="stories">
+        <div class="container">
+            <h2 class="section-title">Daily Micro Stories</h2>
+            
+            <div class="stories-grid">
+                <!-- Video Story 1 --
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="assets/videos/Mystical_Door_Opens_to_Cosmos.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">The Last Starlight</h3>
+                        <p class="story-description">A lone astronaut discovers the last source of light in a dying universe.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 15, 2025</span>
+                            <span class="story-genre">Sci-Fi</span>
+                        </div>
+                    </div>
+                </div>--->
+
+                
+
+      
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="assets/videos/Mystical_Door_Opens_to_Cosmos.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Sound toggle button -->
+                        <button id="soundToggle" class="sound-btn">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Mystical Door Opens</h3>
+                        <p class="story-description">A figure steps through a glowing door into a starry portal, vanishing before it closes.</p>
+                        <div class="story-meta">
+                            <span class="story-date">Sep 6, 2025</span>
+                            <span class="story-genre">Fantasy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="assets/videos/Hollow_Ball.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Sound toggle button -->
+                        <button id="soundToggle" class="sound-btn">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Hollow Steel Ball</h3>
+                        <p class="story-description">ASRM video, cutting hollow steel ball with knife.</p>
+                        <div class="story-meta">
+                            <span class="story-date">Sep 2, 2025</span>
+                            <span class="story-genre">ASMR</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="assets/videos/A_lonely_animestyle.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Sound toggle button -->
+                        <button id="soundToggle" class="sound-btn">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Lonely Man in train</h3>
+                        <p class="story-description">An anime character sees their glowing, smiling reflection in a rain-streaked train window at night.</p>
+                        <div class="story-meta">
+                            <span class="story-date">Sep 6, 2025</span>
+                            <span class="story-genre">Fantasy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="assets/videos/A_dark_void.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Sound toggle button -->
+                        <button id="soundToggle" class="sound-btn">
+                            <i class="fas fa-volume-mute"></i>
+                        </button>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Dark Void</h3>
+                        <p class="story-description">From a single star, a universe is born, flourishes, and then fades back into the void.</p>
+                        <div class="story-meta">
+                            <span class="story-date">Sep 6, 2025</span>
+                            <span class="story-genre">Cosmic.</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                
+                <!-- Instagram Embed 1 -->
+                <div class="story-card">
+                    <div class="instagram-embed">
+                        <!-- In a real implementation, you would use the Instagram embed code -->
+                        <div style="background: #000; color: white; padding: 20px; text-align: center; border-radius: 12px;">
+                            <i class="fab fa-instagram" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <p>Instagram video embed would appear here</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">(In production, use official Instagram embed code)</p>
+                        </div>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Neon Dreams</h3>
+                        <p class="story-description">A cyberpunk detective searches for memories in a digital dreamscape.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 14, 2025</span>
+                            <span class="story-genre">Cyberpunk</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Story 2 -->
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="https://assets.codepen.io/426167/sample-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Ocean's Memory</h3>
+                        <p class="story-description">A marine biologist discovers that the ocean holds memories of ancient civilizations.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 13, 2025</span>
+                            <span class="story-genre">Fantasy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instagram Embed 2 -->
+                <div class="story-card">
+                    <div class="instagram-embed">
+                        <div style="background: #000; color: white; padding: 20px; text-align: center; border-radius: 12px;">
+                            <i class="fab fa-instagram" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <p>Instagram video embed would appear here</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">(In production, use official Instagram embed code)</p>
+                        </div>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Desert Mirage</h3>
+                        <p class="story-description">A wanderer in the desert finds an oasis that only appears at midnight.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 12, 2025</span>
+                            <span class="story-genre">Adventure</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Story 3 -->
+                <div class="story-card">
+                    <div class="video-container">
+                        <video class="story-video" autoplay muted loop playsinline>
+                            <source src="https://assets.codepen.io/426167/sample-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Time Weavers</h3>
+                        <p class="story-description">A secret society manipulates time threads to prevent temporal catastrophes.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 11, 2025</span>
+                            <span class="story-genre">Sci-Fi</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instagram Embed 3 -->
+                <div class="story-card">
+                    <div class="instagram-embed">
+                        <div style="background: #000; color: white; padding: 20px; text-align: center; border-radius: 12px;">
+                            <i class="fab fa-instagram" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <p>Instagram video embed would appear here</p>
+                            <p style="font-size: 0.8rem; margin-top: 10px;">(In production, use official Instagram embed code)</p>
+                        </div>
+                    </div>
+                    <div class="story-info">
+                        <h3 class="story-title">Whispers of the Forest</h3>
+                        <p class="story-description">An ancient forest communicates with a young child through glowing plants.</p>
+                        <div class="story-meta">
+                            <span class="story-date">May 10, 2025</span>
+                            <span class="story-genre">Fantasy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="load-more">
+                <button class="load-more-btn">Load More Stories</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About the Project</h2>
+            
+            <div class="about-content">
+                <p>AI Micro Stories is a creative experiment bringing 8-second cinematic AI shorts to life. Stories are imagined by Jaiho Labs, co-written with ChatGPT, and rendered visually by Veo.</p>
+                
+                <div class="ai-illustration">
+                    <div class="ai-circle circle-1"></div>
+                    <div class="ai-circle circle-2"></div>
+                    <div class="ai-circle circle-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <h2 class="section-title">Our Creative Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="team-name">Jaiho Labs</h3>
+                    <p class="team-role">Creator & Director</p>
+                    <p>Imagining the concepts and guiding the creative vision for each micro-story.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3 class="team-name">ChatGPT</h3>
+                    <p class="team-role">Co-Writer & Creative Partner</p>
+                    <p>Collaborating on story development and refining narrative prompts.</p>
+                </div>
+                
+                <div class="team-card">
+                    <div class="team-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="team-name">Veo</h3>
+                    <p class="team-role">Visual Story Generator</p>
+                    <p>Transforming written concepts into captivating visual narratives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/aimicrostories" target="_blank" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@arshvir" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.facebook.com/people/aimicrostories/61580500825522/" target="_blank" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://jaiho-digital.onrender.com" target="_blank" class="social-link" aria-label="JaihoDigital">
+                            <i class="fas fa-building"></i>
+                        </a>
+                        <a href="https://jaiho-labs.onrender.com" target="_blank" class="social-link" aria-label="JaihoLabs">
+                            <i class="fas fa-flask"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="subscribe-section">
+                    <h3>Subscribe for Daily Stories</h3>
+                    <form class="subscribe-form">
+                        <input type="email" class="form-input" placeholder="Your email address" aria-label="Your email address" required>
+                        <button type="submit" class="form-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 AI Micro Stories • Powered by Jaiho Labs</p>
+            </div>
+        </div>
+        
+        <!-- Shooting stars will be added by JavaScript -->
+    </footer>
+
+    <script>
+
+        
+const videos = document.querySelectorAll(".story-video");
+const soundBtns = document.querySelectorAll(".sound-btn");
+
+soundBtns.forEach((btn, index) => {
+    const video = videos[index];
+    const icon = btn.querySelector("i");
+
+    btn.addEventListener("click", () => {
+        video.muted = !video.muted;
+        icon.classList.toggle("fa-volume-mute", video.muted);
+        icon.classList.toggle("fa-volume-up", !video.muted);
+    });
+});
+
+
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Set initial theme
+        body.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Starfield Animation
+        function initStarfield() {
+            const canvas = document.getElementById('starCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Create stars
+            const stars = [];
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    speed: Math.random() * 0.5,
+                    opacity: Math.random()
+                });
+            }
+            
+            // Shooting stars
+            let shootingStar = null;
+            
+            function createShootingStar() {
+                return {
+                    x: Math.random() * canvas.width / 2,
+                    y: Math.random() * canvas.height / 2,
+                    length: Math.random() * 80 + 20,
+                    speed: Math.random() * 20 + 10,
+                    angle: Math.random() * Math.PI / 4,
+                    opacity: 1
+                };
+            }
+            
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw static stars
+                const gradient = ctx.createRadialGradient(
+                    canvas.width / 2, canvas.height / 2, 0,
+                    canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
+                );
+                
+                gradient.addColorStop(0, 'rgba(15, 23, 36, 0.1)');
+                gradient.addColorStop(1, 'rgba(15, 23, 36, 1)');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw stars
+                stars.forEach(star => {
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                    ctx.fill();
+                    
+                    // Move stars for parallax effect
+                    star.x -= star.speed;
+                    if (star.x < -10) {
+                        star.x = canvas.width + 10;
+                        star.y = Math.random() * canvas.height;
+                    }
+                });
+                
+                // Draw shooting star occasionally
+                if (!shootingStar || shootingStar.opacity <= 0) {
+                    if (Math.random() < 0.01) {
+                        shootingStar = createShootingStar();
+                    }
+                } else {
+                    ctx.beginPath();
+                    ctx.moveTo(shootingStar.x, shootingStar.y);
+                    ctx.lineTo(
+                        shootingStar.x - Math.cos(shootingStar.angle) * shootingStar.length,
+                        shootingStar.y - Math.sin(shootingStar.angle) * shootingStar.length
+                    );
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${shootingStar.opacity})`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    shootingStar.x += shootingStar.speed * Math.cos(shootingStar.angle);
+                    shootingStar.y += shootingStar.speed * Math.sin(shootingStar.angle);
+                    shootingStar.opacity -= 0.02;
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // Initialize starfield when page loads
+        window.addEventListener('load', initStarfield);
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Generate footer shooting stars
+        function createFooterShootingStars() {
+            const footer = document.querySelector('footer');
+            
+            setInterval(() => {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight / 3;
+                
+                star.style.top = `${startY}px`;
+                star.style.left = `${startX}px`;
+                star.style.width = `${Math.random() * 50 + 50}px`;
+                star.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                
+                footer.appendChild(star);
+                
+                // Remove star after animation completes
+                setTimeout(() => {
+                    footer.removeChild(star);
+                }, 3000);
+            }, 3000);
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createFooterShootingStars();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (window.innerWidth < 768) {
+                            navLinks.style.display = 'none';
+                        }
+                    }
+                });
+            });
+            
+            // Watch Stories button scrolls to story grid
+            document.querySelector('.btn-primary').addEventListener('click', () => {
+                document.querySelector('#stories').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+
+            // Follow on Instagram button
+            document.querySelector('.btn-secondary').addEventListener('click', () => {
+                window.open('https://instagram.com/aimicrostories', '_blank');
+            });
+
+            // Follow our other social media platform button
+           document.querySelector('#socialBtn').addEventListener('click', () => {
+           document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+            });
+
+
+
+            // Load More Stories button functionality (runs only once)
+            const loadMoreBtn = document.querySelector('.load-more-btn');
+            const storiesGrid = document.querySelector('.stories-grid');
+            let loaded = false;
+
+            loadMoreBtn.addEventListener('click', () => {
+                if (loaded) return; // Prevents multiple executions
+                
+                // Add loading animation
+                loadMoreBtn.innerHTML = 'Loading...';
+                loadMoreBtn.disabled = true;
+                
+                // Simulate loading delay
+                setTimeout(() => {
+                    const newStoriesHTML = `
+                        <div class="story-card">
+                            <div class="video-container">
+                                <video class="story-video" autoplay muted loop playsinline>
+                                    <source src="https://assets.codepen.io/426167/sample-video.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="story-info">
+                                <h3 class="story-title">Echoes of Tomorrow</h3>
+                                <p class="story-description">A time traveler revisits forgotten memories to change the future.</p>
+                                <div class="story-meta">
+                                    <span class="story-date">May 9, 2025</span>
+                                    <span class="story-genre">Sci-Fi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="instagram-embed">
+                                <div style="background: #000; color: white; padding: 20px; text-align: center; border-radius: 12px;">
+                                    <i class="fab fa-instagram" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>Instagram video embed for new story</p>
+                                    <p style="font-size: 0.8rem; margin-top: 10px;">(In production, use official Instagram embed code)</p>
+                                </div>
+                            </div>
+                            <div class="story-info">
+                                <h3 class="story-title">Digital Dreams</h3>
+                                <p class="story-description">A hacker uncovers secrets in a futuristic megacity.</p>
+                                <div class="story-meta">
+                                    <span class="story-date">May 8, 2025</span>
+                                    <span class="story-genre">Cyberpunk</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="story-card">
+                            <div class="video-container">
+                                <video class="story-video" autoplay muted loop playsinline>
+                                    <source src="https://assets.codepen.io/426167/sample-video.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="story-info">
+                                <h3 class="story-title">Quantum Café</h3>
+                                <p class="story-description">A coffee shop exists in multiple dimensions simultaneously.</p>
+                                <div class="story-meta">
+                                    <span class="story-date">May 7, 2025</span>
+                                    <span class="story-genre">Sci-Fi</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add new stories with smooth animation
+                    storiesGrid.insertAdjacentHTML('beforeend', newStoriesHTML);
+                    
+                    // Mark as loaded and hide the button
+                    loaded = true;
+                    loadMoreBtn.style.display = 'none';
+                    
+                    // Scroll smoothly to show new content
+                    setTimeout(() => {
+                        const newCards = storiesGrid.querySelectorAll('.story-card');
+                        const lastCard = newCards[newCards.length - 3]; // Third from last
+                        lastCard.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 100);
+                    
+                }, 1500); // 1.5 second delay to show loading
+            });
+        });
+    </script>
+</body>
+</html>

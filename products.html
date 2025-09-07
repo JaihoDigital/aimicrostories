@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - AI Micro Stories</title>
+    <meta name="description" content="Explore our comprehensive range of AI products, software solutions, quantum technologies, and innovative applications.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimicrostories.com/products">
+    <meta property="og:title" content="Products - AI Micro Stories">
+    <meta property="og:description" content="Explore our comprehensive range of AI products, software solutions, quantum technologies, and innovative applications.">
+    <meta property="og:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aimicrostories.com/products">
+    <meta property="twitter:title" content="Products - AI Micro Stories">
+    <meta property="twitter:description" content="Explore our comprehensive range of AI products, software solutions, quantum technologies, and innovative applications.">
+    <meta property="twitter:image" content="https://aimicrostories.com/og-image.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Color Variables */
+            --cosmic-dark: #0F1724;
+            --soft-cream: #F9F7F3;
+            --neon-teal: #00E5B5;
+            --warm-coral: #FF6B5F;
+            --violet: #6C5CE7;
+            --dark-blue: #1E2A3A;
+            --light-gray: #E2E8F0;
+            --medium-gray: #718096;
+            
+            /* Theme Variables (Dark by default) */
+            --bg-primary: var(--cosmic-dark);
+            --bg-secondary: var(--dark-blue);
+            --text-primary: var(--soft-cream);
+            --text-secondary: #CBD5E0;
+            --accent: var(--neon-teal);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(30, 42, 58, 0.7);
+            --nav-bg: rgba(15, 23, 36, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--soft-cream);
+            --bg-secondary: #ffffff;
+            --text-primary: var(--cosmic-dark);
+            --text-secondary: #4A5568;
+            --accent: var(--violet);
+            --accent-secondary: var(--warm-coral);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(249, 247, 243, 0.95);
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark theme adjustment for accent color */
+        [data-theme="dark"] {
+            --accent: #26c6a7;
+            --accent-hover: #1da58a;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .theme-toggle .fa-sun {
+            position: absolute;
+            transform: translateY(40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-moon {
+            transform: translateY(-40px);
+        }
+
+        [data-theme="light"] .theme-toggle .fa-sun {
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cosmic-dark) 0%, var(--dark-blue) 100%);
+        }
+
+        [data-theme="light"] .hero {
+            background: linear-gradient(135deg, var(--soft-cream) 0%, #e6f3ff 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Product Categories */
+        .product-categories {
+            padding: 3rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-weight: 500;
+        }
+
+        .category-tab:hover,
+        .category-tab.active {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(38, 198, 167, 0.3);
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            box-shadow: var(--card-shadow);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .product-header {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--violet) 100%);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-category {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-body {
+            padding: 2rem;
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-status {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-available {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-coming-soon {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .status-beta {
+            background: rgba(147, 51, 234, 0.2);
+            color: #9333ea;
+        }
+
+        .product-link {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        [data-theme="dark"] .product-link {
+            background: #26c6a7;
+        }
+
+        .product-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(38, 198, 167, 0.3);
+        }
+
+        /* Results info */
+        .results-info {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--text-secondary);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cosmic-dark);
+            padding: 4rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] footer {
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .social-section h3, .subscribe-section h3 {
+            color: var(--soft-cream);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 36, 0.8);
+            color: var(--soft-cream);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            transform: translateY(-3px);
+        }
+
+        [data-theme="light"] footer .social-link:hover {
+            background: var(--violet);
+            color: var(--soft-cream);
+        }
+
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-input {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--dark-blue);
+            background: var(--dark-blue);
+            color: var(--soft-cream);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-btn {
+            background: var(--accent);
+            color: var(--cosmic-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(38, 198, 167, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--soft-cream);
+        }
+
+        /* Media Queries */
+        @media (min-width: 640px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .nav-links {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">AI Micro Stories</a>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#stories">Stories</a></li>
+                    <li><a href="explore_more.html">Portfolio</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#team">Team</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                
+                <button class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Our Product Universe</h1>
+                <p>Explore our comprehensive range of AI products, software solutions, quantum technologies, and innovative applications</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="product-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <div class="category-tab active" data-category="all">All Products</div>
+                <div class="category-tab" data-category="ai">AI Products</div>
+                <div class="category-tab" data-category="software">Software Products</div>
+                <div class="category-tab" data-category="quantum">Quantum Products</div>
+                <div class="category-tab" data-category="ml">AI/ML/LLMs</div>
+                <div class="category-tab" data-category="webapps">Web Apps</div>
+                <div class="category-tab" data-category="electronics">Electronics</div>
+                <div class="category-tab" data-category="mobile">Mobile Apps</div>
+                <div class="category-tab" data-category="websites">Websites</div>
+            </div>
+            
+            <div class="results-info">
+                <p id="resultsCount">Showing all products</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+            
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-cube"></i>
+                <h3>No products found</h3>
+                <p>Try selecting a different category</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="subscribe-section">
+                    <h3>Subscribe for Updates</h3>
+                    <form class="subscribe-form">
+                        <input type="email" class="form-input" placeholder="Your email address" aria-label="Your email address" required>
+                        <button type="submit" class="form-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 AI Micro Stories • Powered by Jaiho Labs</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product data
+        const productData = [
+            // AI Products
+            {
+                id: 1,
+                title: "Fission AI",
+                description: "A groundbreaking multimodal AI for seamless text-to-video, image, and text generation, coupled with powerful deep research capabilities.",
+                category: "ai",
+                icon: "fas fa-rocket",
+                status: "coming-soon",
+                features: ["Multimodal AI", "Text-to-Video Generation", "Deep Research", "Image Generation"],
+                link: "https://jaiho-labs.onrender.com/pages/coming_soon_products/fission_ai.html"
+            },
+            {
+                id: 2,
+                title: "Visio AI",
+                description: "An intuitive data insight and machine learning platform where users can upload datasets, generate stunning visualizations, download comprehensive reports, and train custom ML models for predictive analytics.",
+                category: "ai",
+                icon: "fas fa-chart-line",
+                status: "available",
+                features: ["Data Visualization", "ML Training", "Report Generation", "Predictive Analytics"],
+                link: "https://visio-ai.streamlit.app/"
+            },
+            {
+                id: 3,
+                title: "Radiant AI",
+                description: "Coming soon: A next-generation AI solution specifically designed for advanced image processing, enhancement, and analysis.",
+                category: "ai",
+                icon: "fas fa-image",
+                status: "coming-soon",
+                features: ["Image Processing", "Enhancement Tools", "Analysis Engine", "Next-Gen AI"],
+                link: "https://jaiho-labs.onrender.com/pages/coming_soon.html"
+            },
+            {
+                id: 4,
+                title: "SPA AI",
+                description: "A highly modular and customizable AI assistant, akin to a personal Jarvis, capable of adapting to diverse user needs and integrating with various systems.",
+                category: "ai",
+                icon: "fas fa-robot",
+                status: "coming-soon",
+                features: ["Personal Assistant", "Modular Design", "System Integration", "Customizable"],
+                link: "https://jaiho-labs.onrender.com/pages/coming_soon.html"
+            },
+            {
+                id: 5,
+                title: "Dev Link Web",
+                description: "A comprehensive suite of utility, professional, and developer tools designed to boost productivity and streamline workflows for engineers and creators.",
+                category: "ai",
+                icon: "fas fa-tools",
+                status: "available",
+                features: ["Developer Tools", "Productivity Suite", "Workflow Automation", "Professional Tools"],
+                link: "https://devlink.streamlit.app/"
+            },
+            
+            // Software Products
+            {
+                id: 6,
+                title: "Dev Link Tools",
+                description: "A comprehensive suite of utility, professional, and developer tools designed to boost productivity and streamline workflows for engineers and creators.",
+                category: "software",
+                icon: "fas fa-code",
+                status: "available",
+                features: ["Text Editor", "Spreadsheet", "Whiteboard", "IP Finder", "PPT Editor"],
+                link: "https://github.com/avarshvir/Dev-Link-Software-for-Developers-and-Users"
+            },
+            {
+                id: 7,
+                title: "Gita-Py Library",
+                description: "An open-source Python library designed for advanced text analysis and philosophical insights, particularly focused on ancient texts and structured knowledge extraction.",
+                category: "software",
+                icon: "fab fa-python",
+                status: "available",
+                features: ["Text Analysis", "Philosophical Insights", "Open Source", "Knowledge Extraction"],
+                link: "https://pypi.org/project/gita-py/"
+            },
+            {
+                id: 8,
+                title: "Dev Link Web Platform",
+                description: "Web-based version of our comprehensive developer tools suite, accessible from anywhere with professional-grade utilities.",
+                category: "software",
+                icon: "fas fa-globe",
+                status: "available",
+                features: ["Web-based Tools", "Cross-platform", "Professional Utilities", "Cloud Access"],
+                link: "https://devlink.streamlit.app/"
+            },
+            
+            // Quantum Products
+            {
+                id: 9,
+                title: "QuantumSim",
+                description: "A powerful and accessible quantum computing simulator for researchers, developers, and enthusiasts to experiment with quantum algorithms and circuits.",
+                category: "quantum",
+                icon: "fas fa-atom",
+                status: "coming-soon",
+                features: ["Quantum Simulation", "Algorithm Testing", "Circuit Design", "Research Tools"],
+                link: "https://jaiho-labs.onrender.com/pages/coming_soon_products/under_cons.html"
+            },
+            {
+                id: 10,
+                title: "Q-Secure",
+                description: "Next-generation quantum-resistant encryption solutions designed to safeguard your data against future quantum threats, ensuring long-term security.",
+                category: "quantum",
+                icon: "fas fa-shield-alt",
+                status: "coming-soon",
+                features: ["Quantum Encryption", "Future-proof Security", "Data Protection", "Threat Resistance"],
+                link: "https://jaiho-labs.onrender.com/pages/coming_soon_products/under_cons.html"
+            },
+            
+            // AI/ML/LLMs Products
+            {
+                id: 11,
+                title: "Sentiment Analysis LR Model",
+                description: "A powerful sentiment analysis ML model based on logistic regression. More models of this category are coming soon like NB, SGD, RF.",
+                category: "ml",
+                icon: "fas fa-brain",
+                status: "available",
+                features: ["Logistic Regression", "Sentiment Analysis", "ML Model", "More Models Coming"],
+                link: "https://huggingface.co/jaiholabs/sentiment-analysis-lr"
+            },
+            
+            // Web Apps
+            {
+                id: 12,
+                title: "Jaiho InvoiceGen",
+                description: "Advanced invoice management system with recurring billing, client management, logo uploading and signature capabilities.",
+                category: "webapps",
+                icon: "fas fa-file-invoice",
+                status: "available",
+                features: ["Invoice Generation", "Client Management", "Recurring Billing", "Digital Signatures"],
+                link: "https://jaiho-invoicegen.vercel.app/index.html"
+            },
+            {
+                id: 13,
+                title: "What's My IP",
+                description: "Fast, accurate, and free IP address detection service serving users worldwide since 2025. Committed to privacy, reliability, and user experience.",
+                category: "webapps",
+                icon: "fas fa-network-wired",
+                status: "available",
+                features: ["IP Detection", "Privacy Focused", "Fast & Accurate", "Free Service"],
+                link: "https://jaiho-ip.vercel.app/"
+            },
+            {
+                id: 14,
+                title: "Ed-Tech Platform",
+                description: "Educational platform where you can learn programming languages, electronics, AI & ML for free of cost.",
+                category: "webapps",
+                icon: "fas fa-graduation-cap",
+                status: "available",
+                features: ["Free Education", "Programming", "Electronics", "AI & ML Courses"],
+                link: "https://itsarc.w3spaces.com/itsarc2.html?fname=&lname="
+            },
+            {
+                id: 15,
+                title: "Mini Color Lab Password",
+                description: "Daily password generator web app where you can get passwords for your Noritsu Mini Color Lab machines.",
+                category: "webapps",
+                icon: "fas fa-key",
+                status: "available",
+                features: ["Daily Passwords", "Noritsu Support", "Color Lab", "Machine Access"],
+                link: "https://jaiholabs.w3spaces.com/"
+            },
+            {
+                id: 16,
+                title: "Tanda Urmar City Website",
+                description: "Connecting our city community through digital innovation. Discover, explore, and celebrate the rich tapestry of places that make our region special.",
+                category: "webapps",
+                icon: "fas fa-city",
+                status: "available",
+                features: ["Community Portal", "Local Discovery", "Digital Innovation", "Regional Celebration"],
+                link: "https://tanda-urmar.vercel.app/"
+            },
+            
+            // Electronics
+            {
+                id: 17,
+                title: "IoT Smart Home Hub",
+                description: "Advanced IoT-based smart home automation system with sensor integration, remote monitoring, and intelligent control capabilities.",
+                category: "electronics",
+                icon: "fas fa-home",
+                status: "beta",
+                features: ["Home Automation", "Sensor Integration", "Remote Control", "Smart Monitoring"],
+                link: "#"
+            },
+            {
+                id: 18,
+                title: "Embedded Weather Station",
+                description: "Comprehensive embedded weather monitoring system with real-time data collection, wireless transmission, and cloud connectivity.",
+                category: "electronics",
+                icon: "fas fa-cloud-sun",
+                status: "available",
+                features: ["Weather Monitoring", "Real-time Data", "Wireless Transfer", "Cloud Integration"],
+                link: "#"
+            },
+            {
+                id: 19,
+                title: "Arduino Plant Monitor",
+                description: "IoT-enabled plant monitoring system using Arduino, measuring soil moisture, light levels, and environmental conditions.",
+                category: "electronics",
+                icon: "fas fa-seedling",
+                status: "available",
+                features: ["Plant Monitoring", "Soil Sensors", "Environmental Data", "IoT Connectivity"],
+                link: "#"
+            },
+            
+            // Mobile Apps
+            {
+                id: 20,
+                title: "Jaiho Calculator",
+                description: "Advanced scientific calculator app with extended mathematical functions, unit conversions, and programmable features.",
+                category: "mobile",
+                icon: "fas fa-calculator",
+                status: "coming-soon",
+                features: ["Scientific Functions", "Unit Converter", "Programmable", "Advanced Math"],
+                link: "#"
+            },
+            {
+                id: 21,
+                title: "Task Manager Pro",
+                description: "Comprehensive task management application with project tracking, team collaboration, and productivity analytics.",
+                category: "mobile",
+                icon: "fas fa-tasks",
+                status: "coming-soon",
+                features: ["Task Management", "Project Tracking", "Team Collaboration", "Analytics"],
+                link: "#"
+            },
+            {
+                id: 22,
+                title: "QR Code Scanner Plus",
+                description: "Multi-functional QR code scanner with batch processing, history tracking, and code generation capabilities.",
+                category: "mobile",
+                icon: "fas fa-qrcode",
+                status: "beta",
+                features: ["QR Scanning", "Batch Processing", "History Tracking", "Code Generation"],
+                link: "#"
+            },
+            
+            // Websites
+            {
+                id: 23,
+                title: "K.S. Plyboard & Hardware",
+                description: "Custom wood products and hardware tools website showcasing premium plywood solutions and construction materials.",
+                category: "websites",
+                icon: "fas fa-hammer",
+                status: "available",
+                features: ["E-commerce", "Product Catalog", "Custom Solutions", "Hardware Tools"],
+                link: "https://ksplyboard.vercel.app/"
+            },
+            {
+                id: 24,
+                title: "Kalra Photography",
+                description: "Professional photography website capturing love and joy through stunning visual storytelling and wedding photography.",
+                category: "websites",
+                icon: "fas fa-camera",
+                status: "available",
+                features: ["Photography Portfolio", "Wedding Services", "Gallery Showcase", "Booking System"],
+                link: "https://kalra-photography.vercel.app/"
+            },
+            {
+                id: 25,
+                title: "TeleConnect Shop",
+                description: "Comprehensive telecom solutions website offering mobile accessories, repair services, and connectivity solutions.",
+                category: "websites",
+                icon: "fas fa-mobile-alt",
+                status: "coming-soon",
+                features: ["Telecom Services", "Mobile Accessories", "Repair Services", "E-commerce"],
+                link: "#"
+            },
+            {
+                id: 26,
+                title: "Fresh Dairy Products",
+                description: "Organic dairy products website featuring farm-fresh milk, cheese, and dairy items with home delivery services.",
+                category: "websites",
+                icon: "fas fa-cow",
+                status: "coming-soon",
+                features: ["Dairy Products", "Organic Items", "Home Delivery", "Fresh Quality"],
+                link: "#"
+            }
+        ];
+
+        let filteredProducts = [...productData];
+        let currentCategory = 'all';
+
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        body.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Get status class
+        function getStatusClass(status) {
+            switch(status) {
+                case 'available': return 'status-available';
+                case 'coming-soon': return 'status-coming-soon';
+                case 'beta': return 'status-beta';
+                default: return 'status-available';
+            }
+        }
+
+        // Get status text
+        function getStatusText(status) {
+            switch(status) {
+                case 'available': return 'Available';
+                case 'coming-soon': return 'Coming Soon';
+                case 'beta': return 'Beta';
+                default: return 'Available';
+            }
+        }
+
+        // Create product card HTML
+        function createProductCard(product) {
+            return `
+                <div class="product-card" data-category="${product.category}">
+                    <div class="product-header">
+                        <div class="product-icon">
+                            <i class="${product.icon}"></i>
+                        </div>
+                        <h3 class="product-title">${product.title}</h3>
+                        <span class="product-category">${product.category.toUpperCase()}</span>
+                    </div>
+                    <div class="product-body">
+                        <p class="product-description">${product.description}</p>
+                        <ul class="product-features">
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <div class="product-footer">
+                            <span class="product-status ${getStatusClass(product.status)}">${getStatusText(product.status)}</span>
+                            <a href="${product.link}" target="_blank" class="product-link">
+                                ${product.status === 'available' ? 'Launch' : 'Learn More'}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render products
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = '';
+                document.getElementById('noResults').style.display = 'block';
+            } else {
+                productsGrid.innerHTML = filteredProducts.map(createProductCard).join('');
+                document.getElementById('noResults').style.display = 'none';
+            }
+            
+            // Update results count
+            const categoryText = currentCategory === 'all' ? 'all' : currentCategory;
+            document.getElementById('resultsCount').textContent = 
+                `Showing ${filteredProducts.length} ${categoryText} products`;
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            if (category === 'all') {
+                filteredProducts = [...productData];
+            } else {
+                filteredProducts = productData.filter(product => product.category === category);
+            }
+            
+            renderProducts();
+        }
+
+        // Category tab functionality
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                filterProducts(tab.dataset.category);
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        if (window.innerWidth < 768) {
+                            navLinks.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
