@@ -1,6 +1,7 @@
 # 🎥 AI Micro Stories  
 
 ### 8-second AI-generated micro stories across genres ✨  
+### Micro Stories, Macro Imagination
 
 ---
 
@@ -21,9 +22,9 @@
 
 ## 🛠 Tech Stack  
 - 🎬 **AI Video Generators:** Sora, Veo  
-- 🧠 **LLMs:** ChatGPT  
-- 🤖 **Automation & Scripting**  
-- 🌐 **Website:** HTML, CSS, JavaScript  
+- 🧠 **LLMs:** ChatGPT, Gemini, Perplexity, DeepSeek 
+- 🤖 **Hosting:** Vercel, GitHub  
+- 🌐 **Tools:** HTML, CSS, JavaScript, BootStrap, VS Code, Git, GitHub 
 
 ---
 
@@ -42,18 +43,19 @@ We welcome contributions! Here's how you can help:
 ---
 
 ## 📜 License  
-- **Code:** MIT License  
-- **Creative Works (stories, visuals):** CC BY-NC 4.0  
+- **Code and Creative Works (stories, visuals):** MIT License  
+<!-- **Creative Works (stories, visuals):** CC BY-NC 4.0 --> 
 
 ---
 
 ## 🙌 Credits  
-- 🛠 Tools: **ChatGPT, Sora, Veo**  
+- 🛠 Tools: **ChatGPT, Sora, Veo, Vercel, DeepSeek, Perplexity AI, GitHub, Git, Gemini**  
 - 👤 Creator: **Arshvir (Jaiho Labs)**  
 
 ---
 
 ## 🌍 Social Media  
 - 📸 Instagram: [@aimicrostories](https://instagram.com/aimicrostories)  
-- ▶️ YouTube: Coming soon  
-- 📘 Facebook Page: Coming soon  
+- ▶️ YouTube: Coming Soon 
+- 📘 Facebook Page: [AI Micro Stories](https://www.facebook.com/people/aimicrostories/61580500825522/)
+- 🧵 Thread: [@aimicrostories](https://www.threads.com/@aimicrostories)
