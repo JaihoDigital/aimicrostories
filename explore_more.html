@@ -360,9 +360,10 @@
         .video-container {
             position: relative;
             width: 100%;
-            padding-top: 56.25%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
             overflow: hidden;
             border-radius: 12px 12px 0 0;
+            background: #000;
         }
 
         .video-thumbnail {
@@ -373,6 +374,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 12px 12px 0 0;
+            border: none;
         }
 
         .play-overlay {
@@ -391,6 +393,7 @@
             font-size: 1.5rem;
             opacity: 0;
             transition: opacity 0.3s ease;
+            pointer-events: none; /* Crucial: allows clicking the video/iframe behind it */
         }
 
         .video-card:hover .play-overlay {
@@ -611,11 +614,9 @@
             .hero h1 {
                 font-size: 3rem;
             }
-            
             .video-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -625,11 +626,9 @@
             .mobile-menu-btn {
                 display: none;
             }
-            
             .nav-links {
                 display: flex;
             }
-            
             .hero h1 {
                 font-size: 3.5rem;
             }
@@ -639,7 +638,6 @@
             .video-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-            
             .footer-content {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -680,7 +678,6 @@
                     <li><a href="explore_more.html" class="active">Portfolio</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#team">Team</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 
@@ -750,7 +747,6 @@
                 <div class="genre-tag" data-genre="comedy">Comedy</div>
                 <div class="genre-tag" data-genre="ASMR">ASMR</div>
                 <div class="genre-tag" data-genre="cosmic">Cosmic</div>
-                
             </div>
         </div>
     </section>
@@ -759,7 +755,7 @@
     <section class="main-content">
         <div class="container">
             <div class="results-info">
-                <p id="resultsCount">Showing all 24 stories</p>
+                <p id="resultsCount">Showing all stories</p>
             </div>
             
             <div class="video-grid" id="videoGrid">
@@ -785,52 +781,57 @@
                 <div class="social-section">
                     <h3>Follow Us</h3>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Instagram">
+                        <a href="https://www.instagram.com/aimicrostories" target="_blank" class="social-link" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="YouTube">
+                        <a href="https://www.youtube.com/@aimicrostories" target="_blank" class="social-link" aria-label="YouTube">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="#" class="social-link" aria-label="Facebook">
+                        <a href="https://www.facebook.com/people/AI-Micro-Stories/61588365518687/" target="_blank" class="social-link" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://jaihoaimedia.vercel.app" target="_blank" class="social-link" aria-label="JaihoAI Media">
+                            <i class="fas fa-building"></i>
+                        </a>
+                        <a href="https://jaiho-digital.onrender.com" target="_blank" class="social-link" aria-label="JaihoDigital">
+                            <i class="fas fa-sitemap"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div class="subscribe-section">
-                    <h3>Subscribe for Daily Stories</h3>
+                    <h3>Contact Us</h3>
                     <form class="subscribe-form">
-                        <input type="email" class="form-input" placeholder="Your email address" aria-label="Your email address" required>
-                        <button type="submit" class="form-btn">Subscribe</button>
+                        <button type="submit" class="form-btn">jaihoaimedia@gmail.com</button>
                     </form>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>© 2025 AI Micro Stories • Powered by Jaiho Labs</p>
+                <p>© 2025 AI Micro Stories • Powered by Jaiho AI Media</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Sample video data
+        // Sample video data: You can now interchangeably use YouTube URLs and Local URLs!
         const videoData = [
             {
                 id: 1,
-                title: "The Last Starlight",
-                description: "A lone astronaut discovers the last source of light in a dying universe.",
+                title: "Language War",
+                description: "We must respect every language and culture, or risk losing the richness of human expression.",
                 genre: "sci-fi",
-                date: "2025-05-15",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                date: "2026-02-21",
+                videoUrl: "https://youtu.be/UStWYlPn2ks?si=j1ADxdSH7LXYbAa9", // Standard YouTube link
                 views: 1250
             },
             {
                 id: 2,
-                title: "Neon Dreams",
+                title: "Neon Dreams (Local MP4 Example)",
                 description: "A cyberpunk detective searches for memories in a digital dreamscape.",
                 genre: "cyberpunk",
                 date: "2025-05-14",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4", // Direct MP4 link
                 views: 890
             },
             {
@@ -839,7 +840,7 @@
                 description: "A figure steps through a glowing door into a starry portal, vanishing before it closes.",
                 genre: "fantasy",
                 date: "2025-09-6",
-                thumbnail: "assets/videos/Mystical_Door_Opens_to_Cosmos.mp4",
+                videoUrl: "assets/videos/Mystical_Door_Opens_to_Cosmos.mp4",
                 views: 2100
             },
             {
@@ -848,16 +849,16 @@
                 description: "A wanderer in the desert finds an oasis that only appears at midnight.",
                 genre: "adventure",
                 date: "2025-05-12",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 756
             },
             {
                 id: 5,
-                title: "Time Weavers",
+                title: "Time Weavers (YouTube Shorts Example)",
                 description: "A secret society manipulates time threads to prevent temporal catastrophes.",
                 genre: "sci-fi",
                 date: "2025-05-11",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://www.youtube.com/shorts/5qap5aO4i9A", // YouTube Shorts link
                 views: 1876
             },
             {
@@ -866,7 +867,7 @@
                 description: "An anime character sees their glowing, smiling reflection in a rain-streaked train window at night.",
                 genre: "fantasy",
                 date: "2025-09-11",
-                thumbnail: "assets/videos/A_lonely_animestyle.mp4",
+                videoUrl: "assets/videos/A_lonely_animestyle.mp4",
                 views: 1432
             },
             {
@@ -875,7 +876,7 @@
                 description: "A hacker discovers their reflection has gained consciousness in cyberspace.",
                 genre: "cyberpunk",
                 date: "2025-05-09",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 967
             },
             {
@@ -884,7 +885,7 @@
                 description: "A mountain's ancient song holds the key to awakening dormant magic.",
                 genre: "fantasy",
                 date: "2025-05-08",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1654
             },
             {
@@ -893,7 +894,7 @@
                 description: "A coffee shop exists in multiple dimensions simultaneously.",
                 genre: "sci-fi",
                 date: "2025-05-07",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 2234
             },
             {
@@ -902,7 +903,7 @@
                 description: "A librarian discovers books that write themselves at midnight.",
                 genre: "mystery",
                 date: "2025-05-06",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1123
             },
             {
@@ -911,7 +912,7 @@
                 description: "A mechanical engineer falls in love with their own creation.",
                 genre: "romance",
                 date: "2025-05-05",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1887
             },
             {
@@ -920,7 +921,7 @@
                 description: "Every full moon, the moon tells jokes to earthbound creatures.",
                 genre: "comedy",
                 date: "2025-05-04",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 2756
             },
             {
@@ -929,7 +930,7 @@
                 description: "A photographer captures shadows that don't belong to anyone.",
                 genre: "horror",
                 date: "2025-05-03",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1456
             },
             {
@@ -938,7 +939,7 @@
                 description: "Airship pirates discover a floating island full of treasures.",
                 genre: "adventure",
                 date: "2025-05-02",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1998
             },
             {
@@ -947,7 +948,7 @@
                 description: "A street vendor sells bottled memories from different lifetimes.",
                 genre: "sci-fi",
                 date: "2025-05-01",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1654
             },
             {
@@ -956,7 +957,7 @@
                 description: "A crystal cave shows visitors their deepest desires.",
                 genre: "fantasy",
                 date: "2025-04-30",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 2100
             },
             {
@@ -965,7 +966,7 @@
                 description: "A lonely programmer falls for an AI hologram.",
                 genre: "romance",
                 date: "2025-04-29",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1876
             },
             {
@@ -974,7 +975,7 @@
                 description: "A magician's final trick makes them disappear forever.",
                 genre: "mystery",
                 date: "2025-04-28",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1432
             },
             {
@@ -983,7 +984,7 @@
                 description: "A pet shop where all animals are incredibly lifelike robots.",
                 genre: "comedy",
                 date: "2025-04-27",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 2234
             },
             {
@@ -992,7 +993,7 @@
                 description: "A coding error summons digital ghosts into reality.",
                 genre: "horror",
                 date: "2025-04-26",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1789
             },
             {
@@ -1001,7 +1002,7 @@
                 description: "Deep sea explorers find a treasure that doesn't want to be found.",
                 genre: "adventure",
                 date: "2025-04-25",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1567
             },
             {
@@ -1010,7 +1011,7 @@
                 description: "A scientist plugs into the internet with their mind.",
                 genre: "cyberpunk",
                 date: "2025-04-24",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1890
             },
             {
@@ -1019,7 +1020,7 @@
                 description: "A garden where each flower blooms in a different time period.",
                 genre: "fantasy",
                 date: "2025-04-23",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 2045
             },
             {
@@ -1028,7 +1029,7 @@
                 description: "A maintenance worker finds love while fixing a space elevator.",
                 genre: "romance",
                 date: "2025-04-22",
-                thumbnail: "https://assets.codepen.io/426167/sample-video.mp4",
+                videoUrl: "https://assets.codepen.io/426167/sample-video.mp4",
                 views: 1723
             },
             {
@@ -1037,7 +1038,7 @@
                 description: "ASRM video, cutting hollow steel ball with knife.",
                 genre: "ASMR",
                 date: "2025-09-02",
-                thumbnail: "assets/videos/Hollow_Ball.mp4",
+                videoUrl: "assets/videos/Hollow_Ball.mp4",
                 views: 1724
             },
             {
@@ -1046,7 +1047,7 @@
                 description: "From a single star, a universe is born, flourishes, and then fades back into the void.",
                 genre: "cosmic",
                 date: "2025-09-06",
-                thumbnail: "assets/videos/A_dark_void.mp4",
+                videoUrl: "assets/videos/A_dark_void.mp4",
                 views: 1724
             },
             {
@@ -1055,7 +1056,7 @@
                 description: "A young woman, tears streaming, confronts the camera: You made my life hell.",
                 genre: "realistic",
                 date: "2025-09-07",
-                thumbnail: "assets/videos/A_beautiful_young.mp4",
+                videoUrl: "assets/videos/A_beautiful_young.mp4",
                 views: 1724
             },
             {
@@ -1064,7 +1065,7 @@
                 description: "A fair young girl sits on a park bench in the evening, smiling as she says, Aaj ka mausam to bohat badiya hai.",
                 genre: "realistic",
                 date: "2025-09-08",
-                thumbnail: "assets/videos/Beautiful_Girl_in_Park_Video.mp4",
+                videoUrl: "assets/videos/Beautiful_Girl_in_Park_Video.mp4",
                 views: 1724
             },
             {
@@ -1073,7 +1074,7 @@
                 description: "A Lamborghini Aventador and Ferrari SF90 Stradale trade the lead in a neon-drenched, high-speed drift through rain-slicked city streets.",
                 genre: "adventure",
                 date: "2025-09-08",
-                thumbnail: "assets/videos/Lamborghini_Ferrari.mp4",
+                videoUrl: "assets/videos/Lamborghini_Ferrari.mp4",
                 views: 1724
             },
             {
@@ -1082,7 +1083,7 @@
                 description: "Two teens on a hilltop watch a shooting star, as the girl whispers a wish with a soft glow lighting their faces.",
                 genre: "fantasy",
                 date: "2025-09-10",
-                thumbnail: "assets/videos/Hindi_Wish_Under_Starry_Sky.mp4",
+                videoUrl: "assets/videos/Hindi_Wish_Under_Starry_Sky.mp4",
                 views: 1724
             },
             {
@@ -1091,7 +1092,7 @@
                 description: "A girl on a park bench smiles as a sparrow lands on her hand, chirping softly in the golden sunlight.",
                 genre: "realistic",
                 date: "2025-09-11",
-                thumbnail: "assets/videos/Sparrow_Lands_On_Girl.mp4",
+                videoUrl: "assets/videos/Sparrow_Lands_On_Girl.mp4",
                 views: 1724
             },
             {
@@ -1100,7 +1101,7 @@
                 description: "Friends at a vibrant evening tea stall erupt in laughter as one teases, Bhai, teri toh shaadi Zomato se honi chahiye!",
                 genre: "comedy",
                 date: "2025-09-12",
-                thumbnail: "assets/videos/Chai_Shaadi_Aur_Zomato.mp4",
+                videoUrl: "assets/videos/Chai_Shaadi_Aur_Zomato.mp4",
                 views: 1724
             }
         ];
@@ -1144,17 +1145,17 @@
             });
         }
 
-        // Sound button functionality
+        // Sound button functionality (For local videos only)
         function toggleSound(videoId) {
             const video = document.querySelector(`#video-${videoId}`);
             const soundBtn = document.querySelector(`#sound-${videoId}`);
             
-            if (video.muted) {
+            if (video && video.muted) {
                 video.muted = false;
                 soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
                 soundBtn.classList.remove('muted');
                 soundBtn.title = 'Mute';
-            } else {
+            } else if (video) {
                 video.muted = true;
                 soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
                 soundBtn.classList.add('muted');
@@ -1162,21 +1163,51 @@
             }
         }
 
-        // Create video card HTML with sound control
+        // Utility: Extract YouTube ID from various YouTube URL formats
+        function getYouTubeId(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // Create video card HTML (Dynamically handles YouTube vs Local MP4)
         function createVideoCard(video) {
+            // Check if the URL is a YouTube link
+            const ytId = getYouTubeId(video.videoUrl);
+            let mediaContent = '';
+
+            if (ytId) {
+                // Generate an iframe for YouTube videos
+                mediaContent = `
+                    <iframe class="video-thumbnail" 
+                        src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=1" 
+                        title="${video.title}"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+            } else {
+                // Generate a native <video> tag for local MP4 files
+                mediaContent = `
+                    <video class="video-thumbnail" id="video-${video.id}" autoplay muted loop playsinline>
+                        <source src="${video.videoUrl}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="sound-btn muted" id="sound-${video.id}" onclick="toggleSound(${video.id})" title="Unmute">
+                        <i class="fas fa-volume-mute"></i>
+                    </button>
+                    <div class="play-overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                `;
+            }
+
             return `
                 <div class="video-card" data-genre="${video.genre}">
                     <div class="video-container">
-                        <video class="video-thumbnail" id="video-${video.id}" autoplay muted loop playsinline>
-                            <source src="${video.thumbnail}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <button class="sound-btn muted" id="sound-${video.id}" onclick="toggleSound(${video.id})" title="Unmute">
-                            <i class="fas fa-volume-mute"></i>
-                        </button>
-                        <div class="play-overlay">
-                            <i class="fas fa-play"></i>
-                        </div>
+                        ${mediaContent}
                     </div>
                     <div class="video-info">
                         <h3 class="video-title">${video.title}</h3>
